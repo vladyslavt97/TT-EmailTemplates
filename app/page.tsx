@@ -21,7 +21,7 @@ export default function Home() {
       </header>
 
       <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-35px-25px)] p-8 gap-4 overflow-hidden">
-        <section className="bg-blue-100 flex flex-col items-center justify-center gap-10 rounded-lg">
+        <section className="bg-blue-100 flex flex-col items-center justify-center gap-10 rounded-lg shadow-2xl">
           <h1 className="text-lg font-bold">Setup</h1>
           <div>
             <h2>Arguments:</h2>
@@ -32,7 +32,7 @@ export default function Home() {
         </section>
 
         {/* Right section should be scrollable */}
-        <section className="bg-green-100 flex justify-center overflow-y-auto p-4 rounded-lg">
+        <section className="bg-green-100 flex justify-center overflow-y-auto p-4 rounded-lg shadow-2xl">
           <div className="w-full max-w-3xl">
             <EmailTemplate name="tom" identityInfo={{ fullName: "Ext", leaverDate: "27" }} />
           </div>
