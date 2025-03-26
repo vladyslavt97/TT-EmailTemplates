@@ -1,16 +1,28 @@
+"use client"
+import { useState } from "react";
 import Image from "next/image";
 
 type identityInfo = {
-    fullName: string;
-    leaverDate: string;
-  };
-  
-  type StroeerEmailProps = {
-    name: string;
-    identityInfo: identityInfo;
-  };
-  
-  export default function EmailTemplate({ name, identityInfo }: StroeerEmailProps) {
+  fullName: string;
+  leaverDate: string;
+};
+
+type StroeerEmailProps = {
+  name: string;
+  identityInfo: identityInfo;
+};
+
+export default function EmailTemplate({ name, identityInfo }: StroeerEmailProps) {
+  const [germanText, setGermanText] = useState<string>(
+    `Bei der unten genannten externen Identität...`
+  );
+  const [displayName, setDisplayName] = useState<string>(identityInfo.fullName);
+  const [leaverDate, setLeaverDate] = useState<string>(identityInfo.leaverDate);
+
+  const [englishText, setEnglishText] = useState<string>(
+    `For the external identity below...`
+  );
+
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg text-[#08204A] font-sans">
       {/* Header */}
@@ -39,16 +51,13 @@ type identityInfo = {
             height={15}
             className="absolute top-2 right-2"
           />
-          <p>Hallo {name},</p>
-          <p>
-            Bei der unten genannten externen Identität hat der interne Manager
-            (Sponsor) das Unternehmen verlassen, und es gibt keine nächst
-            höhere Führungskraft vom internen Manager.
-          </p>
-          <p>
-            Daher wurde die externe Identität nun dir als IAM Operations Manager
-            zugewiesen.
-          </p>
+          <p>Hello {name},</p>
+          <textarea
+            value={germanText}
+            onChange={(e) => setGermanText(e.target.value)}
+            className="w-full p-3 mb-3 border border-gray-300 rounded bg-white"
+          />
+
           <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
             <tbody>
               <tr className="border-b border-gray-300">
@@ -75,15 +84,11 @@ type identityInfo = {
             className="absolute top-2 right-2"
           />
           <p>Hello {name},</p>
-          <p>
-            For the external identity below, the internal manager (sponsor) has
-            left the company, and there is no next higher manager from the
-            internal manager.
-          </p>
-          <p>
-            Therefore, the external identity has now been reassigned to you as
-            the IAM Operations Manager.
-          </p>
+          <textarea
+            value={englishText}
+            onChange={(e) => setEnglishText(e.target.value)}
+            className="w-full p-3 mb-3 border border-gray-300 rounded bg-white"
+          />
           <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
             <tbody>
               <tr className="border-b border-gray-300">

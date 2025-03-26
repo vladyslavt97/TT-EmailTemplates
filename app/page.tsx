@@ -1,4 +1,5 @@
 import EmailTemplate from "@/components/EmailTemplate";
+import SaveXml from "@/components/SaveXml";
 import Image from "next/image";
 
 export default function Home() {
@@ -16,15 +17,7 @@ export default function Home() {
             className=" object-contain"
           />
         </div>
-        <div className="flex flex-row gap-5">
-          <Image
-            src="/savebutton.png"
-            alt="Ströer logo"
-            width={30}
-            height={30}
-            className=" object-contain hover:scale-110 cursor-pointer"
-          />
-        </div>
+        <SaveXml/>
       </header>
 
       <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-35px-25px)] p-8 gap-4 overflow-hidden">
