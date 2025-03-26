@@ -30,7 +30,7 @@ export default function Home() {
         {/* Right section should be scrollable */}
         <section className="bg-green-100 flex justify-center overflow-y-auto p-4 rounded-lg shadow-2xl">
           <div className="w-full max-w-3xl">
-            <EmailTemplate name="tom" identityInfo={{ fullName: "Ext", leaverDate: "27" }} />
+            <EmailTemplate />
           </div>
         </section>
       </main>

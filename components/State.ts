@@ -5,7 +5,8 @@ interface ArgumentsObject {
 }
 
 interface EmailInfo {
-  toptext: string;
+  germanText: string;
+  englishText: string;
 }
 
 interface EmailArgs {
@@ -21,8 +22,13 @@ export const useStore = create<{
   setEmailInfo: (emailInfo: EmailInfo) => void;
   setArgumentsObject: (argumentsObject: ArgumentsObject) => void;
   setTemplateName: (templateName: string) => void;
+  setGermanText: (germanText: string) => void;
+  setEnglishText: (englishText: string) => void;
 }>((set) => ({
-  emailInfo: { toptext: "Default top text goes here..." },
+  emailInfo: {
+    germanText: "Bei der unten genannten externen Identität...",
+    englishText: "For the external identity below..."
+  },
   argumentsObject: {
     identityInfo: "map",
     isSecondNotification: "boolean",
@@ -33,4 +39,6 @@ export const useStore = create<{
   setEmailInfo: (emailInfo) => set({ emailInfo }),
   setArgumentsObject: (argumentsObject) => set({ argumentsObject }),
   setTemplateName: (templateName) => set({ templateName }),
+  setGermanText: (germanText) => set((state) => ({ emailInfo: { ...state.emailInfo, germanText } })),
+  setEnglishText: (englishText) => set((state) => ({ emailInfo: { ...state.emailInfo, englishText } })),
 }));

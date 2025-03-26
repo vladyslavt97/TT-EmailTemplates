@@ -1,7 +1,8 @@
 import { NextRequest } from "next/server";
 
 interface EmailInfo {
-    toptext: string;
+    germanText: string;
+    englishText: string;
 }
 
 interface ArgumentsObject {
@@ -201,7 +202,7 @@ export async function POST(request: NextRequest) {
                 <div class="german-section">
                     <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German Flag" class="flag"/>
                     <p>Hallo $identityInfo.addressee,</p>
-                    ${emailInfo.toptext}
+                    ${emailInfo.germanText}
                     
                     <!-- place for a table -->
 
@@ -212,7 +213,7 @@ export async function POST(request: NextRequest) {
                 <div class="english-section">
                     <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK Flag" class="flag"/>
                     <p>Hello $identityInfo.addressee,</p>
-                    ${emailInfo.toptext}
+                    ${emailInfo.englishText}
 
                     <!-- place for a table -->
 

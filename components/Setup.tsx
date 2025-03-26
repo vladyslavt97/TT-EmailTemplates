@@ -1,20 +1,42 @@
 "use client";
+
 import { useStore } from "./State";
 import { useState } from "react";
-
+import { CiEdit } from "react-icons/ci";
 export default function Setup() {
   const { templateName, setTemplateName, argumentsObject, setArgumentsObject } = useStore();
   const [newArgName, setNewArgName] = useState("");
   const [newArgType, setNewArgType] = useState("map");
+
+  // For editing existing arguments
+  const [editingArg, setEditingArg] = useState<string | null>(null);
+  const [editedArgName, setEditedArgName] = useState<string>("");
 
   // Handle template name change
   const handleTemplateNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTemplateName(e.target.value);
   };
 
-  // Handle argument change
+  // Handle argument type change
   const handleArgumentChange = (key: string, value: string) => {
     setArgumentsObject({ ...argumentsObject, [key]: value });
+  };
+
+  // Handle argument name change (for editing existing arguments)
+  const handleArgumentNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditedArgName(e.target.value);
+  };
+
+  // Save edited argument name
+  const saveEditedArgumentName = (key: string) => {
+    if (editedArgName.trim() && editedArgName !== key) {
+      const updatedArguments = { ...argumentsObject };
+      delete updatedArguments[key]; // Remove old key
+      updatedArguments[editedArgName] = updatedArguments[key]; // Add new key with the same value
+      setArgumentsObject(updatedArguments);
+    }
+    setEditingArg(null); // Reset the editing state
+    setEditedArgName(""); // Clear the edited name field
   };
 
   // Add a new argument
@@ -56,16 +78,39 @@ export default function Setup() {
           {Object.entries(argumentsObject).map(([key, value]) => (
             <li key={key} className="flex items-center justify-between border-b py-2">
               <div className="flex-grow">
-                <input
-                  type="text"
-                  value={key}
-                  readOnly
-                  className="border rounded p-1 mr-2 w-40 bg-gray-100"
-                />
+                {editingArg === key ? (
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={editedArgName}
+                      onChange={handleArgumentNameChange}
+                      className="border rounded p-1 mr-2 w-40"
+                    />
+                    <button
+                      onClick={() => saveEditedArgumentName(key)}
+                      className="bg-blue-500 text-white px-2 py-1 rounded"
+                    >
+                      Save
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center">
+                    <span className="mr-2">{key}</span>
+                    <button
+                      onClick={() => {
+                        setEditingArg(key);
+                        setEditedArgName(key); // Pre-fill with the current key
+                      }}
+                      className=" text-black px-2 py-1 rounded"
+                    >
+                      <CiEdit />
+                    </button>
+                  </div>
+                )}
                 <select
                   value={value}
                   onChange={(e) => handleArgumentChange(key, e.target.value)}
-                  className="border rounded p-1"
+                  className="border rounded p-1 ml-2"
                 >
                   <option value="map" className="bg-pink-500">map</option>
                   <option value="boolean" className="bg-amber-500">boolean</option>

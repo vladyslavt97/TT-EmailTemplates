@@ -1,27 +1,11 @@
-"use client"
-import { useState } from "react";
+"use client";
+
+import { useStore } from "./State";
 import Image from "next/image";
 
-type identityInfo = {
-  fullName: string;
-  leaverDate: string;
-};
-
-type StroeerEmailProps = {
-  name: string;
-  identityInfo: identityInfo;
-};
-
-export default function EmailTemplate({ name, identityInfo }: StroeerEmailProps) {
-  const [germanText, setGermanText] = useState<string>(
-    `Bei der unten genannten externen Identität...`
-  );
-  const [displayName, setDisplayName] = useState<string>(identityInfo.fullName);
-  const [leaverDate, setLeaverDate] = useState<string>(identityInfo.leaverDate);
-
-  const [englishText, setEnglishText] = useState<string>(
-    `For the external identity below...`
-  );
+export default function EmailTemplate() {
+  const { emailInfo, setGermanText, setEnglishText } = useStore();
+  const { germanText, englishText } = emailInfo;
 
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg text-[#08204A] font-sans">
@@ -51,7 +35,7 @@ export default function EmailTemplate({ name, identityInfo }: StroeerEmailProps)
             height={15}
             className="absolute top-2 right-2"
           />
-          <p>Hello {name},</p>
+          <p>Hello $identityInfo.addressee,</p>
           <textarea
             value={germanText}
             onChange={(e) => setGermanText(e.target.value)}
@@ -62,11 +46,11 @@ export default function EmailTemplate({ name, identityInfo }: StroeerEmailProps)
             <tbody>
               <tr className="border-b border-gray-300">
                 <th className="text-left p-3 bg-[#f0f8ff]">Display Name:</th>
-                <td className="p-3">{identityInfo.fullName}</td>
+                <td className="p-3">nevermind</td>
               </tr>
               <tr>
                 <th className="text-left p-3 bg-[#f0f8ff]">Leaver Date:</th>
-                <td className="p-3">{identityInfo.leaverDate}</td>
+                <td className="p-3">ndvermind</td>
               </tr>
             </tbody>
           </table>
@@ -83,7 +67,7 @@ export default function EmailTemplate({ name, identityInfo }: StroeerEmailProps)
             height={15}
             className="absolute top-2 right-2"
           />
-          <p>Hello {name},</p>
+          <p>Hello $identityInfo.addressee,</p>
           <textarea
             value={englishText}
             onChange={(e) => setEnglishText(e.target.value)}
@@ -93,11 +77,11 @@ export default function EmailTemplate({ name, identityInfo }: StroeerEmailProps)
             <tbody>
               <tr className="border-b border-gray-300">
                 <th className="text-left p-3 bg-[#f0f8ff]">Display Name:</th>
-                <td className="p-3">{identityInfo.fullName}</td>
+                <td className="p-3">nevermind</td>
               </tr>
               <tr>
                 <th className="text-left p-3 bg-[#f0f8ff]">Leaver Date:</th>
-                <td className="p-3">{identityInfo.leaverDate}</td>
+                <td className="p-3">nevermind</td>
               </tr>
             </tbody>
           </table>
