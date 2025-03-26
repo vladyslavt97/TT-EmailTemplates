@@ -1,5 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+import { NextRequest } from "next/server";
 
 interface IdentityInfo {
   addressee: string;
@@ -14,16 +13,14 @@ interface EmailArgs {
   templateName: string;
 }
 
-export async function POST(request: Request) {
-  // Parse request body
-  const requestBody = await request.json();
-  console.log("requestBody: ",requestBody);
-  
-  const { identityInfo, secondNotification, managerEmailBoolean, templateName }: EmailArgs = requestBody;
+export async function POST(request: NextRequest) {
+  try {
+    // Parse request body
+    const requestBody = await request.json();
+    const { identityInfo, secondNotification, managerEmailBoolean, templateName }: EmailArgs = requestBody;
 
-  // Generate the XML content based on the data
-  const generateXML = ({ identityInfo, secondNotification, managerEmailBoolean, templateName }: EmailArgs): string => {
-    return `<?xml version='1.0' encoding='UTF-8'?>
+    // Generate the XML content
+    const xmlContent = `<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE EmailTemplate PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <EmailTemplate name="${templateName}">
   <Description>Enter description</Description>
@@ -63,33 +60,18 @@ export async function POST(request: Request) {
   ]]>
   </Body>
 </EmailTemplate>`;
-  };
 
-  // Generate the XML content
-  const xmlContent = generateXML({ identityInfo, secondNotification, managerEmailBoolean, templateName });
-
-  // Sanitize the template name
-  const sanitizedTemplateName = templateName.replace(/[^a-zA-Z0-9]/g, '_');
-  
-  // Define the file path to save the XML file
-  const filePath = path.join(process.cwd(), `${sanitizedTemplateName}.xml`);
-
-  try {
-    // Write the XML content to a file
-    fs.writeFileSync(filePath, xmlContent, 'utf8');
-    
-    // Return success response
-    return new Response(JSON.stringify({ message: 'XML file created successfully', filePath }), {
+    return new Response(xmlContent, {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        "Content-Type": "application/xml",
+        "Content-Disposition": `attachment; filename="${templateName}.xml"`,
+      },
     });
   } catch (err) {
-    console.error('Error writing the XML file:', err);
-    
-    // Return error response
-    return new Response(JSON.stringify({ message: `Error writing the XML file: ${err}` }), {
+    return new Response(JSON.stringify({ message: `Error generating XML file: ${err}` }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
   }
 }

@@ -3,7 +3,6 @@
 import Image from "next/image";
 
 export default function SaveXml() {
-  // Handle the API call to generate the XML file
   const handleGenerateXML = async () => {
     const identityInfo = {
       addressee: "John Doe",
@@ -15,9 +14,7 @@ export default function SaveXml() {
       // Make the POST request to the backend API route
       const response = await fetch('/api/generateXml', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           identityInfo,
           secondNotification: false,
@@ -26,30 +23,37 @@ export default function SaveXml() {
         }),
       });
 
-      // Parse the response
-      const result = await response.json();
-
-      if (response.ok) {
-        alert(`XML file created successfully: ${result.filePath}`);
-      } else {
-        throw new Error(result.message);
+      if (!response.ok) {
+        throw new Error("Failed to generate XML file");
       }
+
+      // Convert response to a blob
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link and trigger a download
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "STR-EmailTemplate-ExternalLeaverOrManagerNotification.xml"; // Default name
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+
     } catch (error) {
       alert("Error generating XML file: " + error);
     }
   };
 
   return (
-    <div className="text-center mt-4">
       <div className="flex flex-row gap-5" onClick={handleGenerateXML}>
         <Image
           src="/savebutton.png"
-          alt="Ströer logo"
+          alt="Save XML"
           width={30}
           height={30}
           className="object-contain hover:scale-110 cursor-pointer"
         />
       </div>
-    </div>
   );
 }
