@@ -4,16 +4,25 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="grid grid-rows-[35px_1fr_25px] min-h-screen overflow-hidden">
-      <header className="bg-gray-200 w-full flex items-center justify-around">
-        <span className="font-bold"><i>Top Tech</i> production :)</span>
+      <header className="bg-blue-100 w-full flex items-center justify-between px-5">
+        <span className="font-bold"><i className="text-orange-500">Top Tech</i> production :)</span>
         <div className="flex flex-row gap-5">
-          <span>EmailTemplates generator</span>
+          <h2><span className="font-bold italic text-lg text-orange-500">Basic</span> EmailTemplate generator</h2>
           <Image
             src="/mailicon.png"
             alt="Ströer logo"
             width={25}
             height={25}
             className=" object-contain"
+          />
+        </div>
+        <div className="flex flex-row gap-5">
+          <Image
+            src="/savebutton.png"
+            alt="Ströer logo"
+            width={30}
+            height={30}
+            className=" object-contain hover:scale-110 cursor-pointer"
           />
         </div>
       </header>
@@ -37,7 +46,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="bg-gray-200 w-full flex items-center justify-center">
+      <footer className="bg-blue-50 w-full flex items-center justify-center">
         All rights reserved!
       </footer>
     </div>
