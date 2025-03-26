@@ -9,7 +9,7 @@ export default function Home() {
         <span>Email Templates generator</span>
       </header>
 
-      <main className="grid grid-cols-[40%_60%] w-full h-full p-8 gap-4">
+      <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-35px-25px)] p-8 gap-4 overflow-hidden">
         <section className="bg-blue-100 flex flex-col items-center justify-center gap-10">
           <h1 className="text-lg font-bold">Setup</h1>
           <div>
@@ -21,8 +21,8 @@ export default function Home() {
         </section>
 
         {/* Right section should be scrollable */}
-        <section className="bg-green-100 max-h-[calc(100vh-35px-25px)] overflow-y-auto">
-          <div className="w-full max-w-3xl p-4">
+        <section className="bg-green-100 flex justify-center overflow-y-auto p-4">
+          <div className="w-full max-w-3xl">
             <EmailTemplate name="tom" identityInfo={{ fullName: "Ext", leaverDate: "27" }} />
           </div>
         </section>
