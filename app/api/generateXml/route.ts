@@ -13,13 +13,14 @@ interface EmailArgs {
     emailInfo: EmailInfo;
     argumentsObject: ArgumentsObject; // Add this
     templateName: string;
+    description: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const requestBody = await request.json();
-    const { emailInfo, argumentsObject, templateName }: EmailArgs = requestBody;
+    const { emailInfo, argumentsObject, templateName, description }: EmailArgs = requestBody;
     console.log("requestBody: ", requestBody)
     
     // const argumentsObject = {
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
     const xmlContent = `<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE EmailTemplate PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <EmailTemplate name="STR-EmailTemplate-${templateName}">
-  <Description>Notification to the Manager for Reassigning Externals</Description>
+  <Description>${description}</Description>
   <Signature>
     <Inputs>
     ${argumentsXML}

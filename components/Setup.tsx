@@ -8,7 +8,7 @@ import { CiSaveUp2 } from "react-icons/ci";
 import { IoMdAdd } from "react-icons/io";
 
 export default function Setup() {
-  const { templateName, setTemplateName, argumentsObject, setArgumentsObject } = useStore();
+  const { templateName, setTemplateName, description, setDescription, argumentsObject, setArgumentsObject } = useStore();
   const [newArgName, setNewArgName] = useState("");
   const [newArgType, setNewArgType] = useState("map");
 
@@ -19,6 +19,11 @@ export default function Setup() {
   // Handle template name change
   const handleTemplateNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTemplateName(e.target.value);
+  };
+
+  // Handle template name change
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDescription(e.target.value);
   };
 
   // Handle argument type change
@@ -71,6 +76,19 @@ export default function Setup() {
             onChange={handleTemplateNameChange}
             className="border rounded p-2 flex-grow ml-2 bg-white"
             placeholder="Enter template suffix..."
+          />
+        </div>
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-bold mb-1">Description</label>
+        <div className="flex items-center">
+          <input
+            type="text"
+            value={description}
+            onChange={handleDescriptionChange}
+            className="border rounded p-2 flex-grow ml-2 bg-white"
+            placeholder="Enter description"
           />
         </div>
       </div>
