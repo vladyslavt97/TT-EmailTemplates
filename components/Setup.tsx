@@ -67,7 +67,7 @@ export default function Setup() {
     <div className="p-4 max-w-md mx-auto">
       {/* Template Name Input */}
       <div className="mb-4">
-        <label className="block text-sm font-bold mb-1">Template Name</label>
+        <label className="block text-xs font-bold mb-1">Template Name</label>
         <div className="flex items-center">
           <span className="text-gray-500">STR-EmailTemplate-</span>
           <input
@@ -81,7 +81,7 @@ export default function Setup() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-bold mb-1">Description</label>
+        <label className="block text-xs font-bold mb-1">Description</label>
         <div className="flex items-center">
           <input
             type="text"

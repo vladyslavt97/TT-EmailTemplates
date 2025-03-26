@@ -54,7 +54,7 @@ export default function EnglishTableEditor() {
                   </td>
                   <td className="p-2">
                     <button
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 text-sm"
+                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 text-xs"
                       onClick={() => removeRowFromEnglishTable(0, rowIndex)}
                     >
                       Remove Row
@@ -67,14 +67,14 @@ export default function EnglishTableEditor() {
 
           <div className="mt-3 flex gap-2">
             <button
-              className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 text-sm"
+              className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 text-xs"
               onClick={() => addRowToEnglishTable(0)}
             >
               Add Row
             </button>
 
             <button
-              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm"
+              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-xs"
               onClick={() => removeEnglishTable(0)}
             >
               Remove Table

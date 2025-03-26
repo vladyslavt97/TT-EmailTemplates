@@ -26,7 +26,7 @@ export default function EmailTemplate() {
 
       {/* Content */}
       <div className="p-6">
-        <div className="font-bold text-sm mb-4">Group IT - IT Compliance - IAM Team</div>
+        <div className="font-bold text-xs mb-4">Group IT - IT Compliance - IAM Team</div>
 
         {/* German Section */}
         <div className="relative bg-[#f8f9fc] p-5 rounded-lg mb-5">
