@@ -1,5 +1,6 @@
 import EmailTemplate from "@/components/EmailTemplate";
 import SaveXml from "@/components/SaveXml";
+import Setup from "@/components/Setup";
 import Image from "next/image";
 
 export default function Home() {
@@ -23,12 +24,7 @@ export default function Home() {
       <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-35px-25px)] p-8 gap-4 overflow-hidden">
         <section className="bg-blue-100 flex flex-col items-center justify-center gap-10 rounded-lg shadow-2xl">
           <h1 className="text-lg font-bold">Setup</h1>
-          <div>
-            <h2>Arguments:</h2>
-            <ul>
-              <li></li>
-            </ul>
-          </div>
+          <Setup/>
         </section>
 
         {/* Right section should be scrollable */}
