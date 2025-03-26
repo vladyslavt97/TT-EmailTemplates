@@ -2,7 +2,8 @@
 
 import { useStore } from "./State";
 import Image from "next/image";
-import TableEditor from "./TableEditor";
+import GermanTableEditor from "./GermanTableEditor";
+import EnglishTableEditor from "./EnglishTableEditor";
 
 export default function EmailTemplate() {
   const { emailInfo, setGermanText, setEnglishText } = useStore();
@@ -42,7 +43,7 @@ export default function EmailTemplate() {
             onChange={(e) => setGermanText(e.target.value)}
             className="w-full p-3 mb-3 border border-gray-300 rounded bg-white"
           />
-          <TableEditor/>
+          <GermanTableEditor/>
           {/* <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
             <tbody>
               <tr className="border-b border-gray-300">
@@ -74,7 +75,8 @@ export default function EmailTemplate() {
             onChange={(e) => setEnglishText(e.target.value)}
             className="w-full p-3 mb-3 border border-gray-300 rounded bg-white"
           />
-          <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
+          <EnglishTableEditor/>
+          {/* <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
             <tbody>
               <tr className="border-b border-gray-300">
                 <th className="text-left p-3 bg-[#f0f8ff]">Display Name:</th>
@@ -85,7 +87,7 @@ export default function EmailTemplate() {
                 <td className="p-3">nevermind</td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
           <p className="mt-3">If you have any questions, please contact the IAM team at <strong>iam@stroeer.de</strong>.</p>
           <p className="mt-4">Best regards,<br />Your Group IT - IT Compliance - IAM Team</p>
         </div>

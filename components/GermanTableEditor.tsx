@@ -3,38 +3,41 @@
 import { useState } from "react";
 import { useStore } from "./State";
 
-export default function TableEditor() {
-  const { tables, addTable, addRow, updateTable, removeTable, removeRow } = useStore();
+export default function GermanTableEditor() {
+  // Extract the functions and germanTables state from the store
+  const { germanTables, addGermanTable, addRowToGermanTable, updateGermanTable, removeGermanTable, removeRowFromGermanTable } = useStore();
   const [showTable, setShowTable] = useState(false);
-console.log("***",tables)
+
+  console.log("***", germanTables); // To see the German tables in the console
+
   return (
     <div className="mb-5">
-      {!tables.length && (
+      {!germanTables.length && (
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           onClick={() => {
-            addTable();
+            addGermanTable();
             setShowTable(true);
           }}
         >
-          Add a Table
+          Add a German Table
         </button>
       )}
 
-      {tables.length > 0 && (
+      {germanTables.length > 0 && (
         <div className="bg-[#eff1fa] p-4 rounded-lg mt-4">
           <table className="w-full border-collapse">
             <tbody>
-              {tables[0].map((row, rowIndex) => (
+              {germanTables[0].map((row, rowIndex) => (
                 <tr key={rowIndex} className="border-b border-gray-300">
                   <td className="p-2 bg-[#f0f8ff]">
                     <input
                       type="text"
                       value={row.key}
                       onChange={(e) =>
-                        updateTable(0, rowIndex, e.target.value, row.value)
+                        updateGermanTable(0, rowIndex, e.target.value, row.value)
                       }
-                      className="w-full p-2 border rounded"
+                      className="w-full p-2 border rounded bg-white"
                       placeholder="Key"
                     />
                   </td>
@@ -43,16 +46,16 @@ console.log("***",tables)
                       type="text"
                       value={row.value}
                       onChange={(e) =>
-                        updateTable(0, rowIndex, row.key, e.target.value)
+                        updateGermanTable(0, rowIndex, row.key, e.target.value)
                       }
-                      className="w-full p-2 border rounded"
+                      className="w-full p-2 border rounded bg-white"
                       placeholder="Value"
                     />
                   </td>
                   <td className="p-2">
                     <button
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-                      onClick={() => removeRow(0, rowIndex)}
+                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 text-sm"
+                      onClick={() => removeRowFromGermanTable(0, rowIndex)}
                     >
                       Remove Row
                     </button>
@@ -64,15 +67,15 @@ console.log("***",tables)
 
           <div className="mt-3 flex gap-2">
             <button
-              className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
-              onClick={() => addRow(0)}
+              className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 text-sm"
+              onClick={() => addRowToGermanTable(0)}
             >
               Add Row
             </button>
 
             <button
-              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-              onClick={() => removeTable(0)}
+              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm"
+              onClick={() => removeGermanTable(0)}
             >
               Remove Table
             </button>
