@@ -2,6 +2,7 @@
 
 import { useStore } from "./State";
 import Image from "next/image";
+import TableEditor from "./TableEditor";
 
 export default function EmailTemplate() {
   const { emailInfo, setGermanText, setEnglishText } = useStore();
@@ -41,8 +42,8 @@ export default function EmailTemplate() {
             onChange={(e) => setGermanText(e.target.value)}
             className="w-full p-3 mb-3 border border-gray-300 rounded bg-white"
           />
-
-          <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
+          <TableEditor/>
+          {/* <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
             <tbody>
               <tr className="border-b border-gray-300">
                 <th className="text-left p-3 bg-[#f0f8ff]">Display Name:</th>
@@ -53,7 +54,7 @@ export default function EmailTemplate() {
                 <td className="p-3">ndvermind</td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
           <p className="mt-3">Wenn Du Fragen hast, wende Dich bitte an das IAM-Team unter <strong>iam@stroeer.de</strong>.</p>
           <p className="mt-4">Mit freundlichen Grüßen,<br />Ihr Group IT - IT Compliance - IAM Team</p>
         </div>
