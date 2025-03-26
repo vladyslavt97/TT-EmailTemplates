@@ -12,7 +12,7 @@ type identityInfo = {
   
   export default function EmailTemplate({ name, identityInfo }: StroeerEmailProps) {
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg overflow-hidden shadow-lg text-[#08204A] font-sans">
+    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg text-[#08204A] font-sans">
       {/* Header */}
       <div className="bg-[#08204A] p-5 text-center text-white rounded-t-lg">
         <div className="inline-block bg-white p-2 rounded">

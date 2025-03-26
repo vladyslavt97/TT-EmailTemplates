@@ -13,14 +13,18 @@ export default function Home() {
         <section className="bg-blue-100 flex flex-col items-center justify-center gap-10">
           <h1 className="text-lg font-bold">Setup</h1>
           <div>
-            <h2>Argumnets:</h2>
+            <h2>Arguments:</h2>
             <ul>
               <li></li>
             </ul>
           </div>
         </section>
-        <section className="bg-green-100 flex items-center justify-center overflow-scroll">
-          <EmailTemplate name="tom" identityInfo={{ fullName: "Ext", leaverDate: "27" }} />
+
+        {/* Right section should be scrollable */}
+        <section className="bg-green-100 max-h-[calc(100vh-35px-25px)] overflow-y-auto">
+          <div className="w-full max-w-3xl p-4">
+            <EmailTemplate name="tom" identityInfo={{ fullName: "Ext", leaverDate: "27" }} />
+          </div>
         </section>
       </main>
 
