@@ -9,12 +9,6 @@ interface EmailInfo {
   englishText: string;
 }
 
-interface EmailArgs {
-  emailInfo: EmailInfo;
-  argumentsObject: ArgumentsObject;
-  templateName: string;
-}
-
 export const useStore = create<{
   emailInfo: EmailInfo;
   argumentsObject: ArgumentsObject;
