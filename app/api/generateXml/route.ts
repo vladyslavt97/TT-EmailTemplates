@@ -1,8 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { NextApiRequest, NextApiResponse } from 'next';
 
-// Interface for the arguments you'll pass
 interface IdentityInfo {
   addressee: string;
   fullName: string;
@@ -16,12 +14,14 @@ interface EmailArgs {
   templateName: string;
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log('Request body:', req.body);
-  // Extract arguments from request body
-  const { identityInfo, secondNotification, managerEmailBoolean, templateName }: EmailArgs = req.body;
+export async function POST(request: Request) {
+  // Parse request body
+  const requestBody = await request.json();
+  console.log("requestBody: ",requestBody);
+  
+  const { identityInfo, secondNotification, managerEmailBoolean, templateName }: EmailArgs = requestBody;
 
-  // Function to generate the XML content
+  // Generate the XML content based on the data
   const generateXML = ({ identityInfo, secondNotification, managerEmailBoolean, templateName }: EmailArgs): string => {
     return `<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE EmailTemplate PUBLIC "sailpoint.dtd" "sailpoint.dtd">
@@ -65,21 +65,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 </EmailTemplate>`;
   };
 
-  // Generate the XML content using the arguments
+  // Generate the XML content
   const xmlContent = generateXML({ identityInfo, secondNotification, managerEmailBoolean, templateName });
 
-  // Define file path
-  const filePath = path.join(process.cwd(), `${templateName}.xml`);
-
-  // Save the XML content to a file
-  fs.writeFile(filePath, xmlContent, 'utf8', (err) => {
-    if (err) {
-      console.error('Error writing the XML file:', err);
-      res.status(500).json({ message: `Error writing the XML file: ${err.message}` });
-      return;
-    }
+  // Sanitize the template name
+  const sanitizedTemplateName = templateName.replace(/[^a-zA-Z0-9]/g, '_');
   
-    console.log("XML file written successfully:", filePath);
-    res.status(200).json({ message: 'XML file created successfully', filePath });
-  });
+  // Define the file path to save the XML file
+  const filePath = path.join(process.cwd(), `${sanitizedTemplateName}.xml`);
+
+  try {
+    // Write the XML content to a file
+    fs.writeFileSync(filePath, xmlContent, 'utf8');
+    
+    // Return success response
+    return new Response(JSON.stringify({ message: 'XML file created successfully', filePath }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (err) {
+    console.error('Error writing the XML file:', err);
+    
+    // Return error response
+    return new Response(JSON.stringify({ message: `Error writing the XML file: ${err}` }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 }
