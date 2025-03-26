@@ -3,6 +3,10 @@
 import { useStore } from "./State";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
+import { CiTrash } from "react-icons/ci";
+import { CiSaveUp2 } from "react-icons/ci";
+import { IoMdAdd } from "react-icons/io";
+
 export default function Setup() {
   const { templateName, setTemplateName, argumentsObject, setArgumentsObject } = useStore();
   const [newArgName, setNewArgName] = useState("");
@@ -77,7 +81,7 @@ export default function Setup() {
         <ul>
           {Object.entries(argumentsObject).map(([key, value]) => (
             <li key={key} className="flex items-center justify-between border-b py-2">
-              <div className="flex-grow">
+              <div className="flex flex-row">
                 {editingArg === key ? (
                   <div className="flex gap-2">
                     <input
@@ -90,7 +94,7 @@ export default function Setup() {
                       onClick={() => saveEditedArgumentName(key)}
                       className="bg-blue-500 text-white px-2 py-1 rounded"
                     >
-                      Save
+                      <CiSaveUp2 />
                     </button>
                   </div>
                 ) : (
@@ -101,7 +105,7 @@ export default function Setup() {
                         setEditingArg(key);
                         setEditedArgName(key); // Pre-fill with the current key
                       }}
-                      className=" text-black px-2 py-1 rounded"
+                      className=" text-black px-2 py-1 rounded cursor-pointer"
                     >
                       <CiEdit />
                     </button>
@@ -112,17 +116,17 @@ export default function Setup() {
                   onChange={(e) => handleArgumentChange(key, e.target.value)}
                   className="border rounded p-1 ml-2"
                 >
-                  <option value="map" className="bg-pink-500">map</option>
-                  <option value="boolean" className="bg-amber-500">boolean</option>
-                  <option value="string" className="bg-blue-500">String</option>
-                  <option value="List" className="bg-green-500">List</option>
+                  <option value="map">map</option>
+                  <option value="boolean">boolean</option>
+                  <option value="string">String</option>
+                  <option value="List">List</option>
                 </select>
               </div>
               <button
                 onClick={() => removeArgument(key)}
-                className="bg-red-500 text-white px-2 py-1 rounded ml-2"
+                className="bg-red-500 text-white px-2 py-1 rounded ml-2 cursor-pointer"
               >
-                Remove
+                <CiTrash />
               </button>
             </li>
           ))}
@@ -144,8 +148,8 @@ export default function Setup() {
           <option value="string">string</option>
           <option value="number">number</option>
         </select>
-        <button onClick={addArgument} className="bg-blue-500 text-white px-3 py-2 rounded">
-          Add
+        <button onClick={addArgument} className="bg-blue-500 text-white px-3 py-2 rounded cursor-pointer">
+            <IoMdAdd />
         </button>
       </div>
     </div>

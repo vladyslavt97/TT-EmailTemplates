@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useStore } from "./State";
+import { FaRegSave } from "react-icons/fa";
 
 export default function SaveXml() {
   const { emailInfo, argumentsObject, templateName } = useStore();
@@ -41,14 +42,8 @@ export default function SaveXml() {
   };
 
   return (
-    <div className="flex flex-row gap-5" onClick={handleGenerateXML}>
-      <Image
-        src="/savebutton.png"
-        alt="Save XML"
-        width={30}
-        height={30}
-        className="object-contain hover:scale-110 cursor-pointer"
-      />
+    <div className="flex flex-row gap-5 hover:scale-110 cursor-pointer" onClick={handleGenerateXML}>
+      <FaRegSave color="#08204A" size={25}/>
     </div>
   );
 }

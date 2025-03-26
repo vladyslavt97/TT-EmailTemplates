@@ -31,8 +31,7 @@ export async function POST(request: NextRequest) {
         .map(([name, type]) => `<Argument name="${name}" type="${type}"/>`)
         .join("\n");
 
-    const xmlContent = `
-<?xml version='1.0' encoding='UTF-8'?>
+    const xmlContent = `<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE EmailTemplate PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <EmailTemplate name="STR-EmailTemplate-${templateName}">
   <Description>Notification to the Manager for Reassigning Externals</Description>
