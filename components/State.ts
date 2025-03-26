@@ -37,8 +37,8 @@ export const useStore = create<{
   removeRowFromEnglishTable: (tableIndex: number, rowIndex: number) => void;
 }>((set) => ({
   emailInfo: {
-    germanText: "Bei der unten genannten externen Identität...",
-    englishText: "For the external identity below...",
+    germanText: "",
+    englishText: "",
   },
   argumentsObject: {
     identityInfo: "map",

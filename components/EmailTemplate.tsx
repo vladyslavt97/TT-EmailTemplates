@@ -42,6 +42,7 @@ export default function EmailTemplate() {
             value={germanText}
             onChange={(e) => setGermanText(e.target.value)}
             className="w-full p-3 mb-3 border border-gray-300 rounded bg-white"
+            placeholder="Geben Sie hier Ihren Text ein..." 
           />
           <GermanTableEditor/>
           {/* <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
@@ -74,6 +75,7 @@ export default function EmailTemplate() {
             value={englishText}
             onChange={(e) => setEnglishText(e.target.value)}
             className="w-full p-3 mb-3 border border-gray-300 rounded bg-white"
+            placeholder="Start writing your text..." 
           />
           <EnglishTableEditor/>
           {/* <table className="w-full border-collapse mt-3 bg-[#eff1fa]">

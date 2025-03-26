@@ -144,7 +144,7 @@ export default function Setup() {
                 onClick={() => removeArgument(key)}
                 className="bg-red-500 text-white px-2 py-1 rounded ml-2 cursor-pointer"
               >
-                <CiTrash />
+                <CiTrash color="black"/>
               </button>
             </li>
           ))}
@@ -166,7 +166,7 @@ export default function Setup() {
           <option value="string">string</option>
           <option value="number">number</option>
         </select>
-        <button onClick={addArgument} className="bg-blue-500 text-white px-3 py-2 rounded cursor-pointer">
+        <button onClick={addArgument} className="bg-blue-900 hover:bg-blue-800 text-white px-3 py-2 rounded cursor-pointer">
             <IoMdAdd />
         </button>
       </div>

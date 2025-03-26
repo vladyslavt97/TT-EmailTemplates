@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useStore } from "./State";
+import { IoMdAdd } from "react-icons/io";
 
 export default function GermanTableEditor() {
   // Extract the functions and germanTables state from the store
@@ -14,13 +15,13 @@ export default function GermanTableEditor() {
     <div className="mb-5">
       {!germanTables.length && (
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-blue-900 text-white p-2 rounded-full hover:bg-blue-800 text-sm shadow-xl flex justify-center items-center gap-2"
           onClick={() => {
             addGermanTable();
             setShowTable(true);
           }}
         >
-          Add a German Table
+          <IoMdAdd /> Add a Table
         </button>
       )}
 
