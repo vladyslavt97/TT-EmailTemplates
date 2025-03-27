@@ -4,7 +4,7 @@ import { useStore } from "./State";
 import { FaRegSave } from "react-icons/fa";
 
 export default function SaveXml() {
-  const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables } = useStore();
+  const { emailInfo, argumentsObject, templateName, subject, description, germanTables, englishTables } = useStore();
 
   const handleGenerateXML = async () => {
     try {
@@ -18,7 +18,8 @@ export default function SaveXml() {
           templateName,
           description,
           germanTables,
-          englishTables
+          englishTables,
+          subject
         }),
       });
 

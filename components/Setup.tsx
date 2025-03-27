@@ -8,7 +8,7 @@ import { CiSaveUp2 } from "react-icons/ci";
 import { IoMdAdd } from "react-icons/io";
 
 export default function Setup() {
-  const { templateName, setTemplateName, description, setDescription, argumentsObject, setArgumentsObject } = useStore();
+  const { templateName, setTemplateName, subject, setSubject, description, setDescription, argumentsObject, setArgumentsObject } = useStore();
   const [newArgName, setNewArgName] = useState("");
   const [newArgType, setNewArgType] = useState("map");
 
@@ -24,6 +24,10 @@ export default function Setup() {
   // Handle template name change
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
+  };
+  // Handle template name change
+  const handleSubjectChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setSubject(e.target.value);
   };
 
   // Handle argument type change
@@ -64,7 +68,7 @@ export default function Setup() {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto">
+    <div className="p-2 max-w-md mx-auto">
       {/* Template Name Input */}
       <div className="mb-4">
         <label className="block text-xs font-bold mb-1">Template Name</label>
@@ -74,12 +78,23 @@ export default function Setup() {
             type="text"
             value={templateName}
             onChange={handleTemplateNameChange}
-            className="border rounded p-2 flex-grow ml-2 bg-white"
+            className="border rounded p-2 flex-grow ml-2 bg-white text-sm"
             placeholder="Enter template suffix..."
           />
         </div>
       </div>
 
+      <div className="mb-4">
+        <label className="block text-xs font-bold mb-1">Subject</label>
+        <div className="flex items-center">
+            <textarea
+            value={subject}
+            onChange={handleSubjectChange}
+            className="border rounded p-2 flex-grow ml-2 bg-white text-xs resize-none h-20"
+            placeholder="Enter subject"
+            />
+        </div>
+      </div>
       <div className="mb-4">
         <label className="block text-xs font-bold mb-1">Description</label>
         <div className="flex items-center">
@@ -90,7 +105,7 @@ export default function Setup() {
             placeholder="Enter description"
             />
         </div>
-    </div>
+      </div>
 
 
       {/* Arguments List */}

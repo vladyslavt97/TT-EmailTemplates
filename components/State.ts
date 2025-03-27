@@ -19,12 +19,14 @@ export const useStore = create<{
   argumentsObject: ArgumentsObject;
   templateName: string;
   description: string;
+  subject: string;
   germanTables: Table[]; // Separate German tables
   englishTables: Table[]; // Separate English tables
   setEmailInfo: (emailInfo: EmailInfo) => void;
   setArgumentsObject: (argumentsObject: ArgumentsObject) => void;
   setTemplateName: (templateName: string) => void;
   setDescription: (description: string) => void;
+  setSubject: (subject: string) => void;
   setGermanText: (germanText: string) => void;
   setEnglishText: (englishText: string) => void;
   setGermanAddressee: (germanAddressee: string) => void;
@@ -53,6 +55,7 @@ export const useStore = create<{
   },
   templateName: "InternalLeaverNotification",
   description: "",
+  subject: "",
   germanTables: [], // Initialize separate German tables
   englishTables: [], // Initialize separate English tables
 
@@ -60,6 +63,7 @@ export const useStore = create<{
   setArgumentsObject: (argumentsObject) => set({ argumentsObject }),
   setTemplateName: (templateName) => set({ templateName }),
   setDescription: (description) => set({ description }),
+  setSubject: (subject) => set({ subject }),
   setGermanText: (germanText) =>
     set((state) => ({ emailInfo: { ...state.emailInfo, germanText } })),
   setEnglishText: (englishText) =>
