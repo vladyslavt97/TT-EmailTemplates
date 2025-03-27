@@ -30,7 +30,7 @@ export default function Home() {
         </section>
 
         {/* Right section should be scrollable */}
-        <section className="flex justify-center overflow-y-auto rounded-lg shadow-[0px_8px_10px_rgba(0,0,0,0.2),-8px_0px_10px_rgba(0,0,0,0.2)]">
+        <section className="flex justify-center overflow-y-auto rounded-lg ">
           <div className="w-full max-w-3xl">
             <EmailTemplate />
           </div>
