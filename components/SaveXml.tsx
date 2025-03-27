@@ -45,8 +45,9 @@ export default function SaveXml() {
   };
 
   return (
-    <div className="flex flex-row gap-5 hover:scale-110 cursor-pointer" onClick={handleGenerateXML}>
-      <FaRegSave color="white" size={25}/>
+    <div className="flex flex-col items-center hover:scale-110 cursor-pointer text-white hover:text-yellow-500" onClick={handleGenerateXML}>
+      <FaRegSave size={22}/>
+      <p className=" text-xs">save</p>
     </div>
   );
 }
