@@ -8,8 +8,6 @@ export default function GermanTableEditor() {
   // Extract the functions and germanTables state from the store
   const { germanTables, addGermanTable, addRowToGermanTable, updateGermanTable, removeGermanTable, removeRowFromGermanTable } = useStore();
 
-  console.log("***", germanTables); // To see the German tables in the console
-
   return (
     <div className="mb-5">
       {!germanTables.length && (

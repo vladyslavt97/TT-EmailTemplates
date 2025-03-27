@@ -8,8 +8,6 @@ export default function EnglishTableEditor() {
   // Extract the functions and englishTables state from the store
   const { englishTables, addEnglishTable, addRowToEnglishTable, updateEnglishTable, removeEnglishTable, removeRowFromEnglishTable } = useStore();
 
-  console.log("***", englishTables); // To see the English tables in the console
-
   return (
     <div className="mb-5">
       {!englishTables.length && (
