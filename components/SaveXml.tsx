@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useStore } from "./State";
 import { FaRegSave } from "react-icons/fa";
 

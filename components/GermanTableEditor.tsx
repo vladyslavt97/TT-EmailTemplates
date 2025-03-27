@@ -7,7 +7,6 @@ import { IoMdAdd } from "react-icons/io";
 export default function GermanTableEditor() {
   // Extract the functions and germanTables state from the store
   const { germanTables, addGermanTable, addRowToGermanTable, updateGermanTable, removeGermanTable, removeRowFromGermanTable } = useStore();
-  const [showTable, setShowTable] = useState(false);
 
   console.log("***", germanTables); // To see the German tables in the console
 
@@ -18,7 +17,6 @@ export default function GermanTableEditor() {
           className="bg-blue-900 text-white p-2 rounded-full hover:bg-blue-800 text-sm shadow-xl flex justify-center items-center gap-2"
           onClick={() => {
             addGermanTable();
-            setShowTable(true);
           }}
         >
           <IoMdAdd /> Add a Table

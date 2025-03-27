@@ -7,7 +7,6 @@ import { IoMdAdd } from "react-icons/io";
 export default function EnglishTableEditor() {
   // Extract the functions and englishTables state from the store
   const { englishTables, addEnglishTable, addRowToEnglishTable, updateEnglishTable, removeEnglishTable, removeRowFromEnglishTable } = useStore();
-  const [showTable, setShowTable] = useState(false);
 
   console.log("***", englishTables); // To see the English tables in the console
 
@@ -18,7 +17,6 @@ export default function EnglishTableEditor() {
           className="bg-blue-900 text-white p-2 rounded-full hover:bg-blue-800 text-sm shadow-xl flex justify-center items-center gap-2"
           onClick={() => {
             addEnglishTable();
-            setShowTable(true);
           }}
         >
           <IoMdAdd /> Add an Table
