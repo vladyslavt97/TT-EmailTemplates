@@ -5,6 +5,7 @@ interface EmailInfo {
   englishText: string;
   germanAddressee: string;
   englishAddressee: string;
+  title: string;
 }
 
 interface ArgumentsObject {
@@ -24,7 +25,6 @@ interface EmailArgs {
   templateName: string;
   description: string;
   subject: string;
-  title: string;
   germanTables: Table[]; // German tables
   englishTables: Table[]; // English tables
 }
@@ -33,16 +33,17 @@ export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const requestBody = await request.json();
-    const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables, subject, title }: EmailArgs = requestBody;
+    const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables, subject }: EmailArgs = requestBody;
 
     console.log("German Tables: ", germanTables);
     console.log("English Tables: ", englishTables);
+    console.log("argumentsObject: ", argumentsObject);
 
     // Process argumentsObject into XML format
     const argumentsXML = Object.entries(argumentsObject)
       .map(([name, type]) => `      <Argument name="${name}" type="${type}"/>`)
       .join("\n");
-
+      console.log("argumentsXML: ", argumentsXML);
     // Process German tables into HTML format
     const germanTablesHTML = germanTables
       .map(
@@ -240,7 +241,7 @@ ${argumentsXML}
                 <div class="logo-container">
                     <img alt="Ströer logo" src="https://iam-dev.stroeer.com/images/EmailLogo.png" class="logo"/>
                 </div>
-                <h1>${title}</h1>
+                <h1>${emailInfo.title}</h1>
             </div>
 
             <div class="content">

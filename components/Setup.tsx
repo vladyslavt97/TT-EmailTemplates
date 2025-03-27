@@ -44,14 +44,15 @@ export default function Setup() {
   const saveEditedArgumentName = (key: string) => {
     if (editedArgName.trim() && editedArgName !== key) {
       const updatedArguments = { ...argumentsObject };
-      delete updatedArguments[key]; // Remove old key
-      updatedArguments[editedArgName] = updatedArguments[key]; // Add new key with the same value
+      const value = updatedArguments[key]; // Store the existing value before deleting
+      delete updatedArguments[key]; // Remove the old key
+      updatedArguments[editedArgName] = value; // Assign the stored value to the new key
       setArgumentsObject(updatedArguments);
     }
     setEditingArg(null); // Reset the editing state
     setEditedArgName(""); // Clear the edited name field
   };
-
+  
   // Add a new argument
   const addArgument = () => {
     if (newArgName.trim()) {
@@ -66,7 +67,7 @@ export default function Setup() {
     delete updatedArgs[key];
     setArgumentsObject(updatedArgs);
   };
-
+console.log("argumentsObject: ",argumentsObject)
   return (
     <div className="p-2 mx-auto">
       {/* Template Name Input */}
