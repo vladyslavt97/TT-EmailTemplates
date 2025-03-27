@@ -2,6 +2,7 @@
 
 import { useStore } from "./State";
 import { IoMdAdd } from "react-icons/io";
+import { FaTrashAlt } from "react-icons/fa";
 
 export default function EnglishTableEditor() {
   // Extract the functions and englishTables state from the store
@@ -52,7 +53,7 @@ export default function EnglishTableEditor() {
                   </td>
                   <td className="p-2">
                     <button
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 text-xs"
+                      className="bg-red-800 text-white px-2 py-1 rounded hover:bg-red-600 text-xs"
                       onClick={() => removeRowFromEnglishTable(0, rowIndex)}
                     >
                       Remove Row
@@ -63,21 +64,19 @@ export default function EnglishTableEditor() {
             </tbody>
           </table>
 
-          <div className="mt-3 flex gap-2">
+          <div className="mt-3 flex justify-end gap-2 pr-2">
             <button
-              className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 text-xs"
+              className="bg-green-700 text-white px-3 py-1 rounded hover:bg-green-600 text-xs"
               onClick={() => addRowToEnglishTable(0)}
             >
               Add Row
             </button>
-
-            <button
-              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-xs"
-              onClick={() => removeEnglishTable(0)}
-            >
-              Remove Table
-            </button>
           </div>
+          <button
+              className="bg-blue-900 text-white px-3 py-1 rounded hover:bg-blue-800 text-xs w-full mt-5 flex justify-center items-center gap-2"
+              onClick={() => removeEnglishTable(0)}>
+            Remove Table <FaTrashAlt size={15}/>
+          </button>
         </div>
       )}
     </div>

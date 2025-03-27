@@ -3,8 +3,8 @@
 import { useStore } from "./State";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
-import { CiTrash } from "react-icons/ci";
-import { CiSaveUp2 } from "react-icons/ci";
+import { FaTrashAlt } from "react-icons/fa";
+import { IoIosSave } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
 
 export default function Setup() {
@@ -68,17 +68,18 @@ export default function Setup() {
   };
 
   return (
-    <div className="p-2 max-w-md mx-auto">
+    <div className="p-2 mx-auto">
       {/* Template Name Input */}
       <div className="mb-4">
         <label className="block text-xs font-bold mb-1">Template Name</label>
-        <div className="flex items-center">
+        <p className="text-xs text-gray-400">e.g. STR-EmailTemplate-ExternalLeaver</p>
+        <div className="flex items-center pt-2">
           <span className="text-gray-500 text-sm">STR-EmailTemplate-</span>
           <input
             type="text"
             value={templateName}
             onChange={handleTemplateNameChange}
-            className="border rounded p-2 flex-grow ml-2 bg-white text-sm"
+            className="border rounded p-2 flex-grow ml-2 bg-white text-xs"
             placeholder="Enter template suffix..."
           />
         </div>
@@ -86,27 +87,30 @@ export default function Setup() {
 
       <div className="mb-4">
         <label className="block text-xs font-bold mb-1">Subject</label>
-        <div className="flex items-center">
+        <p className="text-xs text-gray-400">e.g. Externe Mitarbeiter Antrag</p>
+        <div className="flex items-center pt-2">
             <textarea
             value={subject}
             onChange={handleSubjectChange}
-            className="border rounded p-2 flex-grow ml-2 bg-white text-xs resize-none h-20"
+            className="border rounded p-2 flex-grow ml-2 bg-white text-xs resize-none"
             placeholder="Enter subject"
             />
         </div>
       </div>
       <div className="mb-4">
         <label className="block text-xs font-bold mb-1">Description</label>
-        <div className="flex items-center">
+        <p className="text-xs text-gray-400">e.g. Notification to the Manager for Reassigning Externals</p>
+        <div className="flex items-center pt-2">
             <textarea
             value={description}
             onChange={handleDescriptionChange}
-            className="border rounded p-2 flex-grow ml-2 bg-white text-xs resize-none h-20"
+            className="border rounded p-2 flex-grow ml-2 bg-white text-xs resize-none"
             placeholder="Enter description"
             />
         </div>
       </div>
 
+      <hr/>
 
       {/* Arguments List */}
       <div className="mb-4">
@@ -121,13 +125,13 @@ export default function Setup() {
                       type="text"
                       value={editedArgName}
                       onChange={handleArgumentNameChange}
-                      className="border rounded p-1 mr-2 w-40"
+                      className="border rounded p-1 mr-2 w-40 bg-white"
                     />
                     <button
                       onClick={() => saveEditedArgumentName(key)}
-                      className="bg-blue-500 text-white px-2 py-1 rounded"
+                      className="text-green-800 hover:text-green-700 hover:scale-110 px-2 rounded cursor-pointer"
                     >
-                      <CiSaveUp2 />
+                      <IoIosSave size={20} />
                     </button>
                   </div>
                 ) : (
@@ -138,7 +142,7 @@ export default function Setup() {
                         setEditingArg(key);
                         setEditedArgName(key); // Pre-fill with the current key
                       }}
-                      className=" text-black px-2 py-1 rounded cursor-pointer"
+                      className="hover:scale-110 text-black px-2 py-1 rounded cursor-pointer"
                     >
                       <CiEdit />
                     </button>
@@ -151,15 +155,15 @@ export default function Setup() {
                 >
                   <option value="map">map</option>
                   <option value="boolean">boolean</option>
-                  <option value="string">String</option>
-                  <option value="List">List</option>
+                  <option value="string">string</option>
+                  <option value="list">list</option>
                 </select>
               </div>
               <button
                 onClick={() => removeArgument(key)}
-                className="bg-red-500 text-white px-2 py-1 rounded ml-2 cursor-pointer"
+                className="text-red-700 hover:text-red-500 hover:scale-105 px-2 py-1 rounded ml-2 cursor-pointer"
               >
-                <CiTrash color="black"/>
+                <FaTrashAlt size={20}/>
               </button>
             </li>
           ))}
@@ -173,13 +177,13 @@ export default function Setup() {
           placeholder="Argument name"
           value={newArgName}
           onChange={(e) => setNewArgName(e.target.value)}
-          className="border rounded p-2 flex-grow"
+          className="border rounded p-2 flex-grow bg-white"
         />
         <select value={newArgType} onChange={(e) => setNewArgType(e.target.value)} className="border rounded p-2">
           <option value="map">map</option>
           <option value="boolean">boolean</option>
           <option value="string">string</option>
-          <option value="number">number</option>
+          <option value="list">list</option>
         </select>
         <button onClick={addArgument} className="bg-blue-900 hover:bg-blue-800 text-white px-3 py-2 rounded cursor-pointer">
             <IoMdAdd />

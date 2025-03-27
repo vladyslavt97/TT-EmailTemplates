@@ -53,7 +53,7 @@ export const useStore = create<{
     isSecondNotification: "boolean",
     isManagerEmail: "boolean",
   },
-  templateName: "InternalLeaverNotification",
+  templateName: "",
   description: "",
   subject: "",
   germanTables: [], // Initialize separate German tables

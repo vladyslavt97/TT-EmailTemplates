@@ -37,7 +37,7 @@ export default function EmailTemplate() {
             height={15}
             className="absolute top-2 right-2 object-contain"
           />
-          <p className="flex flex-row items-baseline gap-2">Hallo 
+          <p className="flex flex-row items-baseline gap-2 pt-2">Hallo 
             <input
               type="text"
               value={germanAddressee}
@@ -66,7 +66,7 @@ export default function EmailTemplate() {
             height={15}
             className="absolute top-2 right-2 object-contain"
           />
-          <p className="flex flex-row items-baseline gap-2">Hello 
+          <p className="flex flex-row items-baseline gap-2 pt-2">Hello 
             <input
               type="text"
               value={englishAddressee}

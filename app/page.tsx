@@ -25,7 +25,7 @@ export default function Home() {
       {/* <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-35px-25px)] p-8 gap-4 overflow-hidden"> */}
       <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-40px)] p-8 gap-4 overflow-hidden">
         <section className="bg-blue-50 flex flex-col items-center justify-center rounded-lg shadow-2xl">
-          <h1 className="text-2xl font-bold">Setup</h1>
+          {/* <h1 className="text-xl font-bold">Setup</h1> */}
           <Setup/>
         </section>
 

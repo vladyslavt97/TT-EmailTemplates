@@ -23,6 +23,7 @@ interface EmailArgs {
   argumentsObject: ArgumentsObject;
   templateName: string;
   description: string;
+  subject: string;
   germanTables: Table[]; // German tables
   englishTables: Table[]; // English tables
 }
@@ -31,33 +32,30 @@ export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const requestBody = await request.json();
-    const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables }: EmailArgs = requestBody;
+    const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables, subject }: EmailArgs = requestBody;
 
     console.log("German Tables: ", germanTables);
     console.log("English Tables: ", englishTables);
 
     // Process argumentsObject into XML format
     const argumentsXML = Object.entries(argumentsObject)
-      .map(([name, type]) => `<Argument name="${name}" type="${type}"/>`)
+      .map(([name, type]) => `      <Argument name="${name}" type="${type}"/>`)
       .join("\n");
 
     // Process German tables into HTML format
     const germanTablesHTML = germanTables
       .map(
         (table) => `
-        <table>
-            ${table
-              .map(
-                (row) => `
-                    <tr>
+                    <table>
+                    ${table
+                      .map(
+                        (row) => `  <tr>
                         <th>${row.key}</th>
                         <td>${row.value}</td>
-                    </tr>
-                `
+                      </tr>`
               )
               .join("")}
-        </table>
-        `
+                    </table>`
       )
       .join(""); // Combine all German tables into one string
 
@@ -65,19 +63,16 @@ export async function POST(request: NextRequest) {
     const englishTablesHTML = englishTables
       .map(
         (table) => `
-        <table>
-            ${table
-              .map(
-                (row) => `
-                    <tr>
+                    <table>
+                    ${table
+                      .map(
+                        (row) => `  <tr>
                         <th>${row.key}</th>
                         <td>${row.value}</td>
-                    </tr>
-                `
+                      </tr>`
               )
               .join("")}
-        </table>
-        `
+                    </table>`
       )
       .join(""); // Combine all English tables into one string
       
@@ -88,10 +83,10 @@ export async function POST(request: NextRequest) {
   <Description>${description}</Description>
   <Signature>
     <Inputs>
-    ${argumentsXML}
+${argumentsXML}
     </Inputs>
   </Signature>
-  <Subject>#if($isSecondNotification)Erinnerung: #end Bitte neue verantwortliche Person für externe Identitäten bestimmen</Subject>
+  <Subject>${subject}</Subject>
   <Body>
   <![CDATA[ 
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -252,11 +247,15 @@ export async function POST(request: NextRequest) {
                 <div class="german-section">
                     <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German Flag" class="flag"/>
                     <p>Hallo ${emailInfo.germanAddressee},</p>
-                    ${emailInfo.germanText}
+${emailInfo.germanText
+  .split("\n")
+  .filter((line) => line.trim() !== "") // Remove empty lines
+  .map((line) => `                    <p>${line.trim()}</p>`) // Add indentation
+  .join("\n")}
                     
-                    <!-- place for a table -->
-                    ${emailInfo.germanText}
-                    ${germanTables.length > 0 ? germanTablesHTML : ""} <!-- German Section Table -->
+                    
+                    <!-- place for GER table -->
+                    ${germanTables.length > 0 ? germanTablesHTML : ""}
 
                     <p>Wenn Du Fragen hast, wende Dich bitte an das IAM-Team unter <strong>iam@stroeer.de</strong>.</p>
                     <p class="marginBottom">Mit freundlichen Grüßen,<br/>Ihr Group IT - IT Compliance - IAM Team</p>
@@ -265,11 +264,14 @@ export async function POST(request: NextRequest) {
                 <div class="english-section">
                     <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK Flag" class="flag"/>
                     <p>Hello ${emailInfo.englishAddressee},</p>
-                    ${emailInfo.englishText}
+${emailInfo.englishText
+  .split("\n")
+  .filter((line) => line.trim() !== "") // Remove empty lines
+  .map((line) => `                    <p>${line.trim()}</p>`) // Add indentation
+  .join("\n")}
 
-                    <!-- place for a table -->
-                    ${emailInfo.englishText}
-                    ${englishTables.length > 0 ? englishTablesHTML : ""} <!-- English Section Table -->
+                    <!-- place for ENG table -->
+                    ${englishTables.length > 0 ? englishTablesHTML : ""}
 
                     <p>If you have any questions, please contact the IAM team at <strong>iam@stroeer.de</strong>.</p>
                     <p class="marginBottom">Best regards,<br/>Your Group IT - IT Compliance - IAM Team</p>
