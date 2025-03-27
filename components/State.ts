@@ -9,6 +9,7 @@ interface EmailInfo {
   englishText: string;
   germanAddressee: string;
   englishAddressee: string;
+  title: string;
 }
 
 type TableRow = { key: string; value: string };
@@ -31,6 +32,7 @@ export const useStore = create<{
   setEnglishText: (englishText: string) => void;
   setGermanAddressee: (germanAddressee: string) => void;
   setEnglishAddressee: (englishAddressee: string) => void;
+  setTitle: (title: string) => void;
   addGermanTable: () => void;
   addEnglishTable: () => void;
   addRowToGermanTable: (tableIndex: number) => void;
@@ -47,6 +49,7 @@ export const useStore = create<{
     englishText: "",
     germanAddressee: "",
     englishAddressee: "",
+    title: "",
   },
   argumentsObject: {
     identityInfo: "map",
@@ -83,6 +86,10 @@ export const useStore = create<{
   setEnglishAddressee: (englishAddressee) =>
     set((state) => ({
         emailInfo: { ...state.emailInfo, englishAddressee },
+    })),
+  setTitle: (title) =>
+    set((state) => ({
+        emailInfo: { ...state.emailInfo, title },
     })),
 
   // Add a new English table

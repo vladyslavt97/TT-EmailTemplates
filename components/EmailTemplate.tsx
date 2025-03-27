@@ -6,8 +6,8 @@ import GermanTableEditor from "./GermanTableEditor";
 import EnglishTableEditor from "./EnglishTableEditor";
 
 export default function EmailTemplate() {
-  const { emailInfo, setGermanAddressee, setEnglishAddressee, setGermanText, setEnglishText } = useStore();
-  const { germanAddressee, englishAddressee, germanText, englishText } = emailInfo;
+  const { emailInfo, setGermanAddressee, setEnglishAddressee, setGermanText, setEnglishText, setTitle } = useStore();
+  const { germanAddressee, englishAddressee, germanText, englishText, title } = emailInfo;
 
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg text-[#08204A] font-sans">
@@ -21,7 +21,14 @@ export default function EmailTemplate() {
             height={50}
           />
         </div>
-        <h1 className="text-lg font-bold mt-3">Externe Mitarbeiter Antrag</h1>
+        <h1 className="text-xs text-gray-500 mt-3">e.g. Externe Mitarbeiter Antrag</h1>
+        <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Geben Sie den Title..."
+              className="w-full p-1 mb-4 border border-gray-300 rounded bg-white text-black"
+            />
       </div>
 
       {/* Content */}

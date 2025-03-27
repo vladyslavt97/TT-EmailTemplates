@@ -24,6 +24,7 @@ interface EmailArgs {
   templateName: string;
   description: string;
   subject: string;
+  title: string;
   germanTables: Table[]; // German tables
   englishTables: Table[]; // English tables
 }
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const requestBody = await request.json();
-    const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables, subject }: EmailArgs = requestBody;
+    const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables, subject, title }: EmailArgs = requestBody;
 
     console.log("German Tables: ", germanTables);
     console.log("English Tables: ", englishTables);
@@ -239,7 +240,7 @@ ${argumentsXML}
                 <div class="logo-container">
                     <img alt="Ströer logo" src="https://iam-dev.stroeer.com/images/EmailLogo.png" class="logo"/>
                 </div>
-                <h1>Externe Mitarbeiter Antrag</h1>
+                <h1>${title}</h1>
             </div>
 
             <div class="content">
