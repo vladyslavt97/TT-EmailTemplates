@@ -6,8 +6,8 @@ import GermanTableEditor from "./GermanTableEditor";
 import EnglishTableEditor from "./EnglishTableEditor";
 
 export default function EmailTemplate() {
-  const { emailInfo, setGermanText, setEnglishText } = useStore();
-  const { germanText, englishText } = emailInfo;
+  const { emailInfo, setGermanAddressee, setEnglishAddressee, setGermanText, setEnglishText } = useStore();
+  const { germanAddressee, englishAddressee, germanText, englishText } = emailInfo;
 
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg text-[#08204A] font-sans">
@@ -35,9 +35,17 @@ export default function EmailTemplate() {
             alt="German Flag"
             width={20}
             height={15}
-            className="absolute top-2 right-2"
+            className="absolute top-2 right-2 object-contain"
           />
-          <p>Hello $identityInfo.addressee,</p>
+          <p className="flex flex-row items-baseline gap-2">Hallo 
+            <input
+              type="text"
+              value={germanAddressee}
+              onChange={(e) => setGermanAddressee(e.target.value)}
+              placeholder="Geben Sie den Namen des Empfängers ein..."
+              className="w-full p-3 mb-4 border border-gray-300 rounded bg-white"
+            />
+          </p>
           <textarea
             value={germanText}
             onChange={(e) => setGermanText(e.target.value)}
@@ -45,18 +53,6 @@ export default function EmailTemplate() {
             placeholder="Geben Sie hier Ihren Text ein..." 
           />
           <GermanTableEditor/>
-          {/* <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
-            <tbody>
-              <tr className="border-b border-gray-300">
-                <th className="text-left p-3 bg-[#f0f8ff]">Display Name:</th>
-                <td className="p-3">nevermind</td>
-              </tr>
-              <tr>
-                <th className="text-left p-3 bg-[#f0f8ff]">Leaver Date:</th>
-                <td className="p-3">ndvermind</td>
-              </tr>
-            </tbody>
-          </table> */}
           <p className="mt-3">Wenn Du Fragen hast, wende Dich bitte an das IAM-Team unter <strong>iam@stroeer.de</strong>.</p>
           <p className="mt-4">Mit freundlichen Grüßen,<br />Ihr Group IT - IT Compliance - IAM Team</p>
         </div>
@@ -68,9 +64,17 @@ export default function EmailTemplate() {
             alt="UK Flag"
             width={20}
             height={15}
-            className="absolute top-2 right-2"
+            className="absolute top-2 right-2 object-contain"
           />
-          <p>Hello $identityInfo.addressee,</p>
+          <p className="flex flex-row items-baseline gap-2">Hello 
+            <input
+              type="text"
+              value={englishAddressee}
+              onChange={(e) => setEnglishAddressee(e.target.value)}
+              placeholder="Geben Sie den Namen des Empfängers ein..."
+              className="w-full p-3 mb-4 border border-gray-300 rounded bg-white"
+            />
+          </p>
           <textarea
             value={englishText}
             onChange={(e) => setEnglishText(e.target.value)}
@@ -78,18 +82,6 @@ export default function EmailTemplate() {
             placeholder="Start writing your text..." 
           />
           <EnglishTableEditor/>
-          {/* <table className="w-full border-collapse mt-3 bg-[#eff1fa]">
-            <tbody>
-              <tr className="border-b border-gray-300">
-                <th className="text-left p-3 bg-[#f0f8ff]">Display Name:</th>
-                <td className="p-3">nevermind</td>
-              </tr>
-              <tr>
-                <th className="text-left p-3 bg-[#f0f8ff]">Leaver Date:</th>
-                <td className="p-3">nevermind</td>
-              </tr>
-            </tbody>
-          </table> */}
           <p className="mt-3">If you have any questions, please contact the IAM team at <strong>iam@stroeer.de</strong>.</p>
           <p className="mt-4">Best regards,<br />Your Group IT - IT Compliance - IAM Team</p>
         </div>

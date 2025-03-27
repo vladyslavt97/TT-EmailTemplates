@@ -3,6 +3,8 @@ import { NextRequest } from "next/server";
 interface EmailInfo {
   germanText: string;
   englishText: string;
+  germanAddressee: string;
+  englishAddressee: string;
 }
 
 interface ArgumentsObject {
@@ -249,7 +251,7 @@ export async function POST(request: NextRequest) {
                 <div class="groupIT">Group IT - IT Compliance - IAM Team</div>
                 <div class="german-section">
                     <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German Flag" class="flag"/>
-                    <p>Hallo $identityInfo.addressee,</p>
+                    <p>Hallo ${emailInfo.germanAddressee},</p>
                     ${emailInfo.germanText}
                     
                     <!-- place for a table -->
@@ -262,7 +264,7 @@ export async function POST(request: NextRequest) {
 
                 <div class="english-section">
                     <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK Flag" class="flag"/>
-                    <p>Hello $identityInfo.addressee,</p>
+                    <p>Hello ${emailInfo.englishAddressee},</p>
                     ${emailInfo.englishText}
 
                     <!-- place for a table -->

@@ -7,6 +7,8 @@ interface ArgumentsObject {
 interface EmailInfo {
   germanText: string;
   englishText: string;
+  germanAddressee: string;
+  englishAddressee: string;
 }
 
 type TableRow = { key: string; value: string };
@@ -25,6 +27,8 @@ export const useStore = create<{
   setDescription: (description: string) => void;
   setGermanText: (germanText: string) => void;
   setEnglishText: (englishText: string) => void;
+  setGermanAddressee: (germanAddressee: string) => void;
+  setEnglishAddressee: (englishAddressee: string) => void;
   addGermanTable: () => void;
   addEnglishTable: () => void;
   addRowToGermanTable: (tableIndex: number) => void;
@@ -39,6 +43,8 @@ export const useStore = create<{
   emailInfo: {
     germanText: "",
     englishText: "",
+    germanAddressee: "",
+    englishAddressee: "",
   },
   argumentsObject: {
     identityInfo: "map",
@@ -66,6 +72,14 @@ export const useStore = create<{
         ? { germanTables: [[{ key: "", value: "" }]] }
         : { germanTables: [...state.germanTables, [{ key: "", value: "" }]] }
     ),
+  setGermanAddressee: (germanAddressee) =>
+    set((state) => ({
+        emailInfo: { ...state.emailInfo, germanAddressee },
+    })),
+  setEnglishAddressee: (englishAddressee) =>
+    set((state) => ({
+        emailInfo: { ...state.emailInfo, englishAddressee },
+    })),
 
   // Add a new English table
   addEnglishTable: () =>
