@@ -14,12 +14,12 @@ export default function EnglishTableEditor() {
     <div className="mb-5">
       {!englishTables.length && (
         <button
-          className="bg-blue-900 text-white p-2 rounded-full hover:bg-blue-800 text-sm shadow-xl flex justify-center items-center gap-2"
+          className="bg-blue-900 text-white p-2 rounded-full hover:bg-blue-800 text-sm shadow-xl flex justify-center items-center gap-2 cursor-pointer"
           onClick={() => {
             addEnglishTable();
           }}
         >
-          <IoMdAdd /> Add an Table
+          <IoMdAdd /> Add a table
         </button>
       )}
 

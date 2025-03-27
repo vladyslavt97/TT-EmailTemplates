@@ -24,17 +24,18 @@ export default function Home() {
 
       {/* <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-35px-25px)] p-8 gap-4 overflow-hidden"> */}
       <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-40px)] p-8 gap-4 overflow-hidden">
-        <section className="bg-blue-50 flex flex-col items-center justify-center rounded-lg shadow-2xl">
+        <section className="bg-blue-50 flex flex-col items-center justify-center rounded-lg shadow-2xl transition-transform duration-500 ease-in-out scale-100 hover:scale-102">
           {/* <h1 className="text-xl font-bold">Setup</h1> */}
           <Setup/>
         </section>
 
         {/* Right section should be scrollable */}
-        <section className="flex justify-center overflow-y-auto rounded-lg">
+        <section className="flex justify-center overflow-y-auto rounded-lg shadow-[0px_8px_10px_rgba(0,0,0,0.2),-8px_0px_10px_rgba(0,0,0,0.2)]">
           <div className="w-full max-w-3xl">
             <EmailTemplate />
           </div>
         </section>
+
       </main>
 
       {/* <footer className="bg-blue-50 w-full flex items-center justify-center">
