@@ -22,7 +22,7 @@ export default function Setup() {
   };
 
   // Handle template name change
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
   };
 
@@ -69,7 +69,7 @@ export default function Setup() {
       <div className="mb-4">
         <label className="block text-xs font-bold mb-1">Template Name</label>
         <div className="flex items-center">
-          <span className="text-gray-500">STR-EmailTemplate-</span>
+          <span className="text-gray-500 text-sm">STR-EmailTemplate-</span>
           <input
             type="text"
             value={templateName}
@@ -83,20 +83,20 @@ export default function Setup() {
       <div className="mb-4">
         <label className="block text-xs font-bold mb-1">Description</label>
         <div className="flex items-center">
-          <input
-            type="text"
+            <textarea
             value={description}
             onChange={handleDescriptionChange}
-            className="border rounded p-2 flex-grow ml-2 bg-white"
+            className="border rounded p-2 flex-grow ml-2 bg-white text-xs resize-none h-20"
             placeholder="Enter description"
-          />
+            />
         </div>
-      </div>
+    </div>
+
 
       {/* Arguments List */}
       <div className="mb-4">
-        <h2 className="text-lg font-bold">Arguments</h2>
-        <ul>
+        <h2 className="text-md font-bold">Arguments</h2>
+        <ul className="text-sm">
           {Object.entries(argumentsObject).map(([key, value]) => (
             <li key={key} className="flex items-center justify-between border-b py-2">
               <div className="flex flex-row">
@@ -152,7 +152,7 @@ export default function Setup() {
       </div>
 
       {/* Add New Argument */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 text-sm w-full">
         <input
           type="text"
           placeholder="Argument name"
