@@ -84,11 +84,13 @@ console.log("validationErrors:", validationErrors);
             className="w-full p-2 mb-4 border border-gray-300 rounded bg-white text-black min-h-[50vh]"
           />
           {validationErrors && (
-            <div className="text-red-500 mt-4">{validationErrors.map((el:any)=>(
-              <div key={el}>
-                {el.message}
-              </div>
-            ))}</div>
+            <ol className="text-red-500 mt-4">
+            {validationErrors.map((el: any, index: number) => (
+              <li key={index}>
+                {index+1}{". "}{el.message}
+              </li>
+            ))}
+          </ol>
           )}
         </>
       ) : (
