@@ -47,34 +47,34 @@ export async function POST(request: NextRequest) {
     // Process German tables into HTML format
     const germanTablesHTML = germanTables
       .map(
-        (table) => `
-                    <table>
-                    ${table
-                      .map(
-                        (row) => `  <tr>
-                        <th>${row.key}</th>
-                        <td>${row.value}</td>
-                      </tr>`
-              )
-              .join("")}
-                    </table>`
+        (table) => 
+        `<table>
+        ${table
+          .map(
+            (row) => `  <tr>
+            <th>${row.key}</th>
+            <td>${row.value}</td>
+          </tr>`
+          )
+          .join("")}
+        </table>`
       )
       .join(""); // Combine all German tables into one string
 
     // Process English tables into HTML format
     const englishTablesHTML = englishTables
       .map(
-        (table) => `
-                    <table>
-                    ${table
-                      .map(
-                        (row) => `  <tr>
-                        <th>${row.key}</th>
-                        <td>${row.value}</td>
-                      </tr>`
-              )
-              .join("")}
-                    </table>`
+        (table) => 
+        `<table>
+        ${table
+          .map(
+            (row) => `  <tr>
+            <th>${row.key}</th>
+            <td>${row.value}</td>
+          </tr>`
+          )
+          .join("")}
+        </table>`
       )
       .join(""); // Combine all English tables into one string
       
@@ -91,204 +91,64 @@ ${argumentsXML}
   <Subject>${subject}</Subject>
   <Body>
   <![CDATA[ 
-    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <title>Ströer</title>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-        <meta content="utf-8" http-equiv="encoding"/>
-        <style>
-            body {
-                background-color: #f5f7fa;
-                font-family: Arial, sans-serif;
-                padding: 20px;
-                color: #08204A;
-            }
+    #set($ctx = $spTools.class.forName("sailpoint.api.SailPointFactory").getMethod("getFactory", null).invoke(null,null).getCurrentContext())
+		#set($emailTools = $spTools.class.forName("sailpoint.rapidsetup.tools.EmailTools").getMethod("instance", null).invoke(null,null))
+    #set($headerTemplate = $emailTools.getEmailSection($ctx, "headerTemplate"))
+		#set($footerTemplate = $emailTools.getEmailSection($ctx, "footerTemplate"))
 
-            img {
-                max-width: 150px;
-                height: auto;
-                margin-bottom: 10px;
-            }
+    <!-- Creating a Hashmap with relevant attributes  -->
+    #set( $rule = $ctx.getObjectByName($spTools.class.forName("sailpoint.object.Rule"), "STR-Rule-EmailTemplateGeneral") )
+    #set( $ruleArgs=$spTools.class.forName("java.util.HashMap").newInstance() )
+    #set( $dummy = $ruleArgs.put( "approvalSet", $approvalSet ) ) 
+    #set( $identityInfo = $ctx.runRule($rule, $ruleArgs) )
+    
+    #if( $headerTemplate )
+			  $headerTemplate
+    #end
 
-            p {
-                margin: 0;
-                padding: 0;
-                font: 10pt Arial;
-                line-height: 15pt;
-                margin-bottom: 18px;
-            }
+    <h1 class="headerText">
+      ${emailInfo.title}
+    </h1>
 
-            .container {
-                max-width: 600px;
-                margin: 0 auto;
-                background-color: #ffffff;
-                border-radius: 10px;
-                overflow: hidden;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            }
-
-            .header, .footer {
-                background-color: #08204A;
-                padding: 20px;
-                text-align: center;
-            }
-
-            .header h1, .footer h1 {
-                color: #ffffff;
-                margin: 0;
-                font: bold 14pt Arial;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 15px;
-                margin-bottom: 25px;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-                overflow: hidden;
-                background-color: #eff1fa;
-            }
-
-            th {
-                background-color: #f0f8ff;
-                padding: 12px;
-                text-align: left;
-                border-bottom: 1px solid #ccc;
-                font-size: 14px;
-            }
-
-            td {
-                padding: 12px;
-                border-bottom: 1px solid #eee;
-                font-size: 14px;
-            }
-
-            tr:last-child td {
-                border-bottom: none;
-            }
-
-            .footer-note {
-                font-size: 13px;
-                font-style: italic;
-                color: #555;
-                margin-top: 20px;
-            }
-
-            a {
-                color: #08204A;
-                text-decoration: none;
-            }
-
-            a:hover {
-                text-decoration: underline;
-            }
-
-            .logo-container {
-                background-color: white;
-                display: inline-block;
-                padding: 8px 8px 0px 8px;
-                border-radius: 4px;
-                margin-bottom: 10px;
-            }
-
-            .hrline {
-                border: none;
-                border-top: 1px solid #ccc;
-                margin: 30px 0;
-            }
-
-            .marginBottom {
-                margin-bottom: 20px;
-            }
-
-            .groupIT {
-                color: #333;
-                font: bold 10pt Arial;
-                margin-bottom: 16px;
-            }
-
-            .german-section {
-                background-color: #f8f9fc;
-                padding: 20px;
-                border-radius: 8px;
-                position: relative;
-            }
-
-            .english-section {
-                position: relative;
-                background-color: #dde4eb;
-                padding: 20px;
-                border-radius: 8px;
-                margin-top: 20px;
-            }
-            .flag {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                width: 20px;
-                height: auto;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <div class="logo-container">
-                    <img alt="Ströer logo" src="https://iam-dev.stroeer.com/images/EmailLogo.png" class="logo"/>
-                </div>
-                <h1>${emailInfo.title}</h1>
-            </div>
-
-            <div class="content">
-                <div class="groupIT">Group IT - IT Compliance - IAM Team</div>
-                <div class="german-section">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German Flag" class="flag"/>
-                    <p>Hallo ${emailInfo.germanAddressee},</p>
-${emailInfo.germanText
-  .split("\n")
-  .filter((line) => line.trim() !== "") // Remove empty lines
-  .map((line) => `                    <p>${line.trim()}</p>`) // Add indentation
-  .join("\n")}
+    <div class="content">
+      <div class="groupIT">Group IT - IT Compliance - IAM Team</div>
+      <div class="german-section">
+        <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German Flag" class="flag"/>
+        <p>Hallo ${emailInfo.germanAddressee},</p>
+        ${emailInfo.germanText
+          .split("\n")
+          .filter((line) => line.trim() !== "") // Remove empty lines
+          .map((line, index) => (index === 0 ? `<p>${line.trim()}</p>` : `        <p>${line.trim()}</p>`)) // Indent only new lines
+          .join("\n")}
                     
                     
-                    <!-- place for GER table -->
-                    ${germanTables.length > 0 ? germanTablesHTML : ""}
+        <!-- place for GER table -->
+        ${germanTables.length > 0 ? germanTablesHTML : ""}
 
-                    <p>Wenn Du Fragen hast, wende Dich bitte an das IAM-Team unter <strong>iam@stroeer.de</strong>.</p>
-                    <p class="marginBottom">Mit freundlichen Grüßen,<br/>Ihr Group IT - IT Compliance - IAM Team</p>
-                </div>
+        <p>Wenn Du Fragen hast, wende Dich bitte an das IAM-Team unter <strong>iam@stroeer.de</strong>.</p>
+        <p class="marginBottom">Mit freundlichen Grüßen,<br/>Ihr Group IT - IT Compliance - IAM Team</p>
+      </div>
 
-                <div class="english-section">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK Flag" class="flag"/>
-                    <p>Hello ${emailInfo.englishAddressee},</p>
-${emailInfo.englishText
-  .split("\n")
-  .filter((line) => line.trim() !== "") // Remove empty lines
-  .map((line) => `                    <p>${line.trim()}</p>`) // Add indentation
-  .join("\n")}
+      <div class="english-section">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK Flag" class="flag"/>
+        <p>Hello ${emailInfo.englishAddressee},</p>
+        ${emailInfo.englishText
+          .split("\n")
+          .filter((line) => line.trim() !== "") // Remove empty lines
+          .map((line, index) => (index === 0 ? `<p>${line.trim()}</p>` : `        <p>${line.trim()}</p>`)) // Indent only new lines
+          .join("\n")}
 
-                    <!-- place for ENG table -->
-                    ${englishTables.length > 0 ? englishTablesHTML : ""}
+        <!-- place for ENG table -->
+        ${englishTables.length > 0 ? englishTablesHTML : ""}
 
-                    <p>If you have any questions, please contact the IAM team at <strong>iam@stroeer.de</strong>.</p>
-                    <p class="marginBottom">Best regards,<br/>Your Group IT - IT Compliance - IAM Team</p>
-                </div>
+        <p>If you have any questions, please contact the IAM team at <strong>iam@stroeer.de</strong>.</p>
+        <p class="marginBottom">Best regards,<br/>Your Group IT - IT Compliance - IAM Team</p>
+      </div>
+    </div>
 
-                <p class="footer-note">Diese Nachricht wurde automatisch erstellt. Antworten auf diese E-Mail werden nicht gelesen.</p>
-                <p><a href="https://iam.stroeer.com/faq">Häufig gestellte Fragen (FAQ)</a></p>
-            </div>
-
-            <div class="footer">
-                <h1>Ströer IT Compliance - IAM</h1>
-            </div>
-        </div>
-    </body>
-    </html>
+    #if( $footerTemplate )
+      $footerTemplate
+    #end
   ]]>
   </Body>
 </EmailTemplate>
