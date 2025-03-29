@@ -9,7 +9,7 @@ export default function PreviewPage() {
   const [htmlInput, setHtmlInput] = useState("");
   const [showPreview, setShowPreview] = useState(false);
   const [isValidHTML, setIsValidHTML] = useState(true);
-  const [validationErrors, setValidationErrors] = useState<Array<string>>();
+  const [validationErrors, setValidationErrors] = useState<Array<{ message: string }>>([]);
 
   const handleToggleView = () => {
     setShowPreview(!showPreview);
@@ -37,7 +37,7 @@ export default function PreviewPage() {
     } catch (error) {
       console.error("Validation error:", error);
       setIsValidHTML(false);
-      setValidationErrors(["Failed to validate HTML."]);
+      setValidationErrors([{message: "Failed to validate HTML."}]);
     }
   };
 
@@ -79,7 +79,7 @@ export default function PreviewPage() {
           <div ref={setContainer} className="w-full mb-4 border border-gray-300 rounded bg-[#282c34] text-black min-h-[50vh]" />
           {validationErrors && (validationErrors.length > 0) && (
             <ol className="text-red-500 mt-4">
-              {validationErrors.map((el: any, index: number) => (
+              {validationErrors.map((el, index) => (
                 <li key={index}>
                   {index + 1}. {el.message}
                 </li>
