@@ -21,7 +21,7 @@ export default function EmailTemplate() {
             height={50}
           />
         </div>
-        <h1 className="text-xs text-gray-500 mt-3">e.g. Externe Mitarbeiter Antrag</h1>
+        <h1 className="text-xs text-gray-500 mt-3">e.g. Externe Mitarbeiter Antrag/External employee application</h1>
         <input
               type="text"
               value={title}
