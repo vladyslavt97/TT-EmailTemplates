@@ -2,6 +2,7 @@ import EmailTemplate from "@/components/EmailTemplate";
 import SaveXml from "@/components/SaveXml";
 import Setup from "@/components/Setup";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -20,6 +21,12 @@ export default function Home() {
           />
         </div>
         <SaveXml/>
+        <div className="text-amber-50 hover:text-amber-500">
+          <Link href="/preview" className="font-bold cursor-pointer !text-amber-50 hover:!text-amber-500">
+            Preview HTML
+          </Link>
+        </div>
+
       </header>
 
       {/* <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-35px-25px)] p-8 gap-4 overflow-hidden"> */}
