@@ -10,7 +10,7 @@ export default function PreviewPage() {
   const [htmlInput, setHtmlInput] = useState("");
   const [showPreview, setShowPreview] = useState(false);
   const [isValidHTML, setIsValidHTML] = useState(true);
-  const [validationErrors, setValidationErrors] = useState<Array<{ message: string }>>([]);
+  const [validationErrors, setValidationErrors] = useState<Array<{ message: string, line: any }>>([]);
 
   const handleToggleView = () => {
     setShowPreview(!showPreview);
@@ -38,7 +38,7 @@ export default function PreviewPage() {
     } catch (error) {
       console.error("Validation error:", error);
       setIsValidHTML(false);
-      setValidationErrors([{message: "Failed to validate HTML."}]);
+      setValidationErrors([{message: "Failed to validate HTML.", line: 0}]);
     }
   };
 
@@ -89,7 +89,7 @@ export default function PreviewPage() {
             <ol className="text-red-500 mt-4">
               {validationErrors.map((el, index) => (
                 <li key={index}>
-                  {index + 1}. {el.message}
+                  {index + 1}. {el.message} {" (line: "+el.line+")"}
                 </li>
               ))}
             </ol>

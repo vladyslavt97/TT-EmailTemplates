@@ -33,13 +33,13 @@ export default function Home() {
 
       {/* <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-35px-25px)] p-8 gap-4 overflow-hidden"> */}
       <main className="grid grid-cols-[40%_60%] w-full max-h-[calc(100vh-40px)] p-8 gap-4 overflow-hidden">
-        <section className="bg-blue-50 flex flex-col items-center justify-center rounded-lg shadow-2xl transition-transform duration-500 ease-in-out scale-100 hover:scale-102">
+        <section className="flex flex-col items-center justify-center rounded-lg transition-transform duration-500 ease-in-out scale-100 hover:scale-102">
           {/* <h1 className="text-xl font-bold">Setup</h1> */}
           <Setup/>
         </section>
 
         {/* Right section should be scrollable */}
-        <section className="flex justify-center overflow-y-auto rounded-lg ">
+        <section className="flex justify-center overflow-y-auto rounded-lg transition-transform duration-500 ease-in-out scale-100 hover:scale-102">
           <div className="w-full max-w-3xl">
             <EmailTemplate />
           </div>

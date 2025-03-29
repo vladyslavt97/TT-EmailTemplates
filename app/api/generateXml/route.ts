@@ -48,17 +48,19 @@ export async function POST(request: NextRequest) {
     const germanTablesHTML = germanTables
       .map(
         (table) => 
-        `<table>
-        ${table
-          .map(
-            (row) => `  <tr>
-            <th>${row.key}</th>
-            <td>${row.value}</td>
-          </tr>`
-          )
-          .join("")}
-        </table>`
-      )
+          `<table>
+          <tbody>
+          ${table
+            .map(
+              (row) => `  <tr>
+              <th scope="col">${row.key}</th>
+              <td>${row.value}</td>
+            </tr>`
+            )
+            .join("")}
+            </tbody>
+          </table>`
+        )
       .join(""); // Combine all German tables into one string
 
     // Process English tables into HTML format
@@ -66,14 +68,16 @@ export async function POST(request: NextRequest) {
       .map(
         (table) => 
         `<table>
+        <tbody>
         ${table
           .map(
             (row) => `  <tr>
-            <th>${row.key}</th>
+            <th scope="col">${row.key}</th>
             <td>${row.value}</td>
           </tr>`
           )
           .join("")}
+          </tbody>
         </table>`
       )
       .join(""); // Combine all English tables into one string
@@ -113,24 +117,23 @@ ${argumentsXML}
     <div class="content">
       <div class="groupIT">Group IT - IT Compliance - IAM Team</div>
       <div class="german-section">
-        <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German Flag" class="flag"/>
+        <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German Flag" class="flag">
         <p>Hallo ${emailInfo.germanAddressee},</p>
         ${emailInfo.germanText
           .split("\n")
           .filter((line) => line.trim() !== "") // Remove empty lines
           .map((line, index) => (index === 0 ? `<p>${line.trim()}</p>` : `        <p>${line.trim()}</p>`)) // Indent only new lines
           .join("\n")}
-                    
-                    
+
         <!-- place for GER table -->
         ${germanTables.length > 0 ? germanTablesHTML : ""}
 
         <p>Wenn Du Fragen hast, wende Dich bitte an das IAM-Team unter <strong>iam@stroeer.de</strong>.</p>
-        <p class="marginBottom">Mit freundlichen Grüßen,<br/>Ihr Group IT - IT Compliance - IAM Team</p>
+        <p class="marginBottom">Mit freundlichen Grüßen,<br>Ihr Group IT - IT Compliance - IAM Team</p>
       </div>
 
       <div class="english-section">
-        <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK Flag" class="flag"/>
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK Flag" class="flag">
         <p>Hello ${emailInfo.englishAddressee},</p>
         ${emailInfo.englishText
           .split("\n")
@@ -142,7 +145,7 @@ ${argumentsXML}
         ${englishTables.length > 0 ? englishTablesHTML : ""}
 
         <p>If you have any questions, please contact the IAM team at <strong>iam@stroeer.de</strong>.</p>
-        <p class="marginBottom">Best regards,<br/>Your Group IT - IT Compliance - IAM Team</p>
+        <p class="marginBottom">Best regards,<br>Your Group IT - IT Compliance - IAM Team</p>
       </div>
     </div>
 

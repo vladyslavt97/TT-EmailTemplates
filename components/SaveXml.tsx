@@ -45,9 +45,12 @@ export default function SaveXml() {
   };
 
   return (
-    <div className="flex flex-col items-center hover:scale-110 cursor-pointer text-white hover:text-yellow-500" onClick={handleGenerateXML}>
-      <FaRegSave size={22}/>
-      <span className=" text-xs">save</span>
+    <div
+      className="flex flex-col items-center px-1 bg-[#252526] border border-[#3c3c3c] rounded hover:bg-[#3c3c3c] hover:scale-110 cursor-pointer text-[#d4d4d4] hover:text-yellow-500 transition-all"
+      onClick={handleGenerateXML}
+    >
+      <FaRegSave size={22} />
+      <span className="text-xs">Save</span>
     </div>
   );
 }
