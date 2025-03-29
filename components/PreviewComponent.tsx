@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCodeMirror } from "@uiw/react-codemirror";
 import { html } from "@codemirror/lang-html";
 import { oneDark } from "@codemirror/theme-one-dark";
+import Link from "next/link";
 
 export default function PreviewPage() {
   const [htmlInput, setHtmlInput] = useState("");
@@ -54,6 +55,13 @@ export default function PreviewPage() {
 
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-lg text-[#08204A] font-sans overflow-y-scroll h-screen w-600 my-auto">
+      <Link
+          href="/"
+          className="bg-[#1e1e1e] !text-[#dcdcaa] font-mono px-4 py-1 rounded-lg shadow-md border border-[#3c3c3c] hover:bg-[#252526] hover:!text-[#ffffff] transition duration-300 cursor-pointer absolute top-1 right-5"
+        >
+        Back To Main
+      </Link>
+
       {/* Header */}
       <div className="bg-[#08204A] p-5 text-center text-white rounded-t-lg">
         <div className="inline-block bg-white p-2 rounded">
@@ -65,7 +73,7 @@ export default function PreviewPage() {
       {showPreview && htmlInput && (
         <button
           onClick={handleToggleView}
-          className={`${showPreview ? "bg-red-500" : "bg-[#08204A]"} text-white py-2 px-4 rounded m-10 absolute top-0 left-0 cursor-pointer`}
+          className={`${showPreview ? "bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-xl transition duration-300" : "bg-[#08204A]"} text-white py-2 px-4 rounded m-10 absolute top-0 left-0 cursor-pointer`}
           disabled={!htmlInput.trim() || !isValidHTML}
         >
           {showPreview ? "Edit HTML" : "Preview"}
@@ -100,7 +108,7 @@ export default function PreviewPage() {
       {!showPreview && htmlInput && (
         <button
           onClick={handleToggleView}
-          className={`${showPreview ? "bg-red-500" : "bg-[#08204A]"} text-white py-2 px-4 rounded m-10 cursor-pointer`}
+          className={`${!showPreview && "bg-[#08204A]"} text-white py-2 px-4 rounded m-10 cursor-pointer`}
           disabled={!htmlInput.trim() || !isValidHTML}
         >
           {showPreview ? "Edit HTML" : "Preview"}
