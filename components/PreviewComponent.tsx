@@ -9,7 +9,7 @@ export default function PreviewPage() {
   const [htmlInput, setHtmlInput] = useState("");
   const [showPreview, setShowPreview] = useState(false);
   const [isValidHTML, setIsValidHTML] = useState(true);
-  const [validationErrors, setValidationErrors] = useState<Array<String>>();
+  const [validationErrors, setValidationErrors] = useState<Array<string>>();
 
   const handleToggleView = () => {
     setShowPreview(!showPreview);
