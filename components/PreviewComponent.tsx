@@ -12,7 +12,7 @@ export default function PreviewPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg text-[#08204A] font-sans overflow-y-scroll h-screen">
+    <div className="max-w-2xl mx-auto bg-white rounded-lg text-[#08204A] font-sans overflow-y-scroll h-screen w-600 my-auto">
       {/* Header */}
       <div className="bg-[#08204A] p-5 text-center text-white rounded-t-lg">
         <div className="inline-block bg-white p-2 rounded">
@@ -38,7 +38,6 @@ export default function PreviewPage() {
       )}
 
       {/* Textarea or Preview Section */}
-      <div className="">
         {!showPreview ? (
           <>
             {/* Textarea for HTML or text input */}
@@ -47,7 +46,7 @@ export default function PreviewPage() {
               onChange={(e) => setHtmlInput(e.target.value)}
               placeholder="Paste your HTML or text here"
               rows={10}
-              className="w-full p-2 mb-4 border border-gray-300 rounded bg-white text-black"
+              className="w-full p-2 mb-4 border border-gray-300 rounded bg-white text-black min-h-[50vh]"
             />
           </>
         ) : (
@@ -59,15 +58,14 @@ export default function PreviewPage() {
             />
         )}
         {/* Button to toggle between textarea and preview */}
-        <button
+        {!showPreview && htmlInput && (<button
           onClick={handleToggleView}
           className={`${showPreview ? "bg-red-500" : "bg-[#08204A]"} text-white py-2 px-4 rounded m-10`}
           disabled={!htmlInput.trim()} // Disable the button if htmlInput is empty or only contains whitespace
         >
           {showPreview ? "Edit HTML" : "Preview"}
-        </button>
+        </button>)}
         
-      </div>
 
       {/* Footer */}
       <div className="bg-[#08204A] p-5 text-center text-white rounded-b-lg">
