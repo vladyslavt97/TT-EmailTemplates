@@ -11,7 +11,6 @@ export async function POST(request: NextRequest) {
 
     // Validate the HTML input and await the result
     const result = await validator.validateString(htmlInput);
-    console.log("hello world2", result);  // Log the result object
 
     // If there are any errors, return them
     if (!result.valid) {
