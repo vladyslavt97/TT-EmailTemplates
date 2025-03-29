@@ -4,13 +4,15 @@ import { HtmlValidate } from "html-validate";
 export async function POST(request: NextRequest) {
   try {
     const { htmlInput } = await request.json();
-    console.log("hello world")
+    console.log("hello world");
+
     // Initialize the HtmlValidate instance
     const validator = new HtmlValidate();
 
-    // Validate the HTML input
-    const result = validator.validateString(htmlInput);
-    console.log("hello world2", result.results)
+    // Validate the HTML input and await the result
+    const result = await validator.validateString(htmlInput);
+    console.log("hello world2", result);  // Log the result object
+
     // If there are any errors, return them
     if (!result.valid) {
       return NextResponse.json(

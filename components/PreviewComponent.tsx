@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import { useCodeMirror } from "@uiw/react-codemirror";
+import { html } from "@codemirror/lang-html";
+import { oneDark } from "@codemirror/theme-one-dark";
 
 export default function PreviewPage() {
   const [htmlInput, setHtmlInput] = useState("");
@@ -22,14 +25,11 @@ export default function PreviewPage() {
 
       const result = await response.json();
 
-
       if (!result.isValid) {
         console.log("Validation failed");
 
         setIsValidHTML(false);
-        setValidationErrors(
-          result.errors[0].messages
-        );
+        setValidationErrors(result.errors[0].messages);
       } else {
         setIsValidHTML(true);
         setValidationErrors([]);
@@ -39,22 +39,25 @@ export default function PreviewPage() {
       setIsValidHTML(false);
       setValidationErrors(["Failed to validate HTML."]);
     }
-};
+  };
 
-console.log("validationErrors:", validationErrors);
+  // Use the `useCodeMirror` hook for the CodeMirror editor
+  const { setContainer } = useCodeMirror({
+    value: htmlInput,
+    theme: oneDark, // You can choose another theme
+    extensions: [html()],
+    onChange: (value) => {
+      setHtmlInput(value);
+      validateHTML(value);
+    },
+  });
 
-  
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-lg text-[#08204A] font-sans overflow-y-scroll h-screen w-600 my-auto">
       {/* Header */}
       <div className="bg-[#08204A] p-5 text-center text-white rounded-t-lg">
         <div className="inline-block bg-white p-2 rounded">
-          <Image
-            src="/loginLogo.png"
-            alt="Ströer logo"
-            width={150}
-            height={50}
-          />
+          <Image src="/loginLogo.png" alt="Ströer logo" width={150} height={50} />
         </div>
       </div>
 
@@ -72,25 +75,16 @@ console.log("validationErrors:", validationErrors);
       {/* Textarea or Preview Section */}
       {!showPreview ? (
         <>
-          <textarea
-            value={htmlInput}
-            onChange={(e) => {
-              const input = e.target.value;
-              setHtmlInput(input);
-              validateHTML(input);
-            }}
-            placeholder="Paste your HTML or text here"
-            rows={10}
-            className="w-full p-2 mb-4 border border-gray-300 rounded bg-white text-black min-h-[50vh]"
-          />
-          {validationErrors && (
+          {/* Render CodeMirror editor */}
+          <div ref={setContainer} className="w-full mb-4 border border-gray-300 rounded bg-[#282c34] text-black min-h-[50vh]" />
+          {validationErrors && (validationErrors.length > 0) && (
             <ol className="text-red-500 mt-4">
-            {validationErrors.map((el: any, index: number) => (
-              <li key={index}>
-                {index+1}{". "}{el.message}
-              </li>
-            ))}
-          </ol>
+              {validationErrors.map((el: any, index: number) => (
+                <li key={index}>
+                  {index + 1}. {el.message}
+                </li>
+              ))}
+            </ol>
           )}
         </>
       ) : (
