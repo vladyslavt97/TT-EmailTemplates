@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function preview() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const Router = useRouter();
   useEffect(() => {
     if (status === "unauthenticated") {

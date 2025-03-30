@@ -10,7 +10,7 @@ import { signOut, useSession } from "next-auth/react";
 import { PiSignOutBold } from "react-icons/pi";
 
 export default function Home() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const Router = useRouter();
 
   useEffect(() => {

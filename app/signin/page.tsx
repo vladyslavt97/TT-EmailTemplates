@@ -15,7 +15,7 @@ const SignIn = () => {
       router.push("/");
     }
   };
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const Router = useRouter();
 
   useEffect(() => {
