@@ -21,7 +21,7 @@ export default function Home() {
   return (
     // <div className="grid grid-rows-[35px_1fr_25px] min-h-screen overflow-hidden">
     <div className="grid grid-rows-[40px_1fr] min-h-screen overflow-hidden bg-[#363636]">
-      <header className="bg-[#08204A] to-100% w-full flex items-center justify-between px-5 text-white">
+      <header className="bg-[#333333] to-100% w-full flex items-center justify-between px-5 text-white">
         <span className="font-bold"><i className="text-pink-800">Top Tech</i> production :)</span>
         <div className="flex flex-row gap-2">
           <h2><span className="font-bold italic text-lg text-pink-800">Basic</span> EmailTemplate generator</h2>
