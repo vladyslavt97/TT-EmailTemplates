@@ -1,5 +1,4 @@
 "use client"
-
 import EmailTemplate from "@/components/EmailTemplate";
 import SaveXml from "@/components/SaveXml";
 import Setup from "@/components/Setup";
