@@ -67,6 +67,7 @@ export default function PreviewPage() {
         <div className="inline-block bg-white p-2 rounded">
           <Image src="/loginLogo.png" alt="Ströer logo" width={150} height={50} />
         </div>
+        <p className="bg-[#08204A] !text-white !-mb-0">Write your html here:</p>
       </div>
 
       {/* Button to toggle between textarea and preview */}
@@ -84,8 +85,7 @@ export default function PreviewPage() {
       {!showPreview ? (
         <>
           {/* Render CodeMirror editor */}
-          <p className="bg-[#08204A] !text-white !-mb-0">Write your html here:</p>
-          <div ref={setContainer} className="w-full mb-4 border border-gray-300 rounded bg-[#282c34] text-black min-h-[50vh]" />
+          <div ref={setContainer} className="w-full mb-4 rounded text-black min-h-[50vh]" />
           {validationErrors && (validationErrors.length > 0) && (
             <ol className="text-red-500 mt-4 pl-4">
               {validationErrors.map((el, index) => (
