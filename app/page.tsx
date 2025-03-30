@@ -4,9 +4,10 @@ import SaveXml from "@/components/SaveXml";
 import Setup from "@/components/Setup";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { PiSignOutBold } from "react-icons/pi";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -39,7 +40,13 @@ export default function Home() {
         >
           Preview HTML
         </Link>
-
+        <button
+            onClick={() => signOut()}
+            className="bg-[#1e1e1e] text-[#dcdcaa] font-mono px-4 py-1 rounded-lg shadow-md border border-[#3c3c3c] hover:bg-[#252526] hover:!text-[#ffffff] transition duration-300 cursor-pointer"
+            title="Sign Out"
+          >
+            <PiSignOutBold size={20} />
+        </button>
 
       </header>
 

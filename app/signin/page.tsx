@@ -1,7 +1,7 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SignIn = () => {
   const [error, setError] = useState("");
@@ -15,14 +15,20 @@ const SignIn = () => {
       router.push("/");
     }
   };
+  const { data: session, status } = useSession();
+  const Router = useRouter();
 
+  useEffect(() => {
+    if (status === "authenticated") {
+      Router.push("/");
+    }
+  }, [status, Router]);
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
-      <h1 className="text-2xl mb-6 text-gray-800">Sign in with Microsoft</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <button
         onClick={handleSignIn}
-        className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700"
+        className="bg-[#1e1e1e] text-[#dcdcaa] font-mono px-4 py-1 rounded-lg shadow-md border border-[#3c3c3c] hover:bg-[#252526] hover:!text-[#ffffff] transition duration-300 cursor-pointer"
       >
         Sign in with Microsoft
       </button>
