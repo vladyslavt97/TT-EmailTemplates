@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function preview() {
+export default function Preview() {
   const { status } = useSession();
   const Router = useRouter();
   useEffect(() => {
