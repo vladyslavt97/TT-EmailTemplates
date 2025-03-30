@@ -84,9 +84,10 @@ export default function PreviewPage() {
       {!showPreview ? (
         <>
           {/* Render CodeMirror editor */}
+          <p className="bg-[#08204A] !text-white !-mb-0">Write your html here:</p>
           <div ref={setContainer} className="w-full mb-4 border border-gray-300 rounded bg-[#282c34] text-black min-h-[50vh]" />
           {validationErrors && (validationErrors.length > 0) && (
-            <ol className="text-red-500 mt-4">
+            <ol className="text-red-500 mt-4 pl-4">
               {validationErrors.map((el, index) => (
                 <li key={index}>
                   {index + 1}. {el.message} {" (line: "+el.line+")"}
@@ -97,7 +98,7 @@ export default function PreviewPage() {
         </>
       ) : (
         <div
-          className="preview-content text-[#08204A]"
+          className="preview-content text-[#08204A] min-h-[70vh]"
           dangerouslySetInnerHTML={{
             __html: htmlInput,
           }}
@@ -108,7 +109,7 @@ export default function PreviewPage() {
       {!showPreview && htmlInput && (
         <button
           onClick={handleToggleView}
-          className={`${!showPreview && "bg-[#08204A]"} text-white py-2 px-4 rounded m-10 cursor-pointer`}
+          className={`${validationErrors.length === 0 ? "bg-[#08204A] text-white" : "bg-[#636363] text-gray-400 opacity-30"} py-2 px-4 rounded m-10 cursor-pointer`}
           disabled={!htmlInput.trim() || !isValidHTML}
         >
           {showPreview ? "Edit HTML" : "Preview"}
