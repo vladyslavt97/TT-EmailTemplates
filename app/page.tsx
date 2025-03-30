@@ -1,10 +1,22 @@
+"use client"
 import EmailTemplate from "@/components/EmailTemplate";
 import SaveXml from "@/components/SaveXml";
 import Setup from "@/components/Setup";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  const Router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      Router.push("/signin");
+    }
+  }, [status, Router]);
   return (
     // <div className="grid grid-rows-[35px_1fr_25px] min-h-screen overflow-hidden">
     <div className="grid grid-rows-[40px_1fr] min-h-screen overflow-hidden">
