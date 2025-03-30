@@ -20,7 +20,7 @@ export default function Home() {
   }, [status, Router]);
   return (
     // <div className="grid grid-rows-[35px_1fr_25px] min-h-screen overflow-hidden">
-    <div className="grid grid-rows-[40px_1fr] min-h-screen overflow-hidden">
+    <div className="grid grid-rows-[40px_1fr] min-h-screen overflow-hidden bg-[#363636]">
       <header className="bg-[#08204A] to-100% w-full flex items-center justify-between px-5 text-white">
         <span className="font-bold"><i className="text-pink-800">Top Tech</i> production :)</span>
         <div className="flex flex-row gap-2">
