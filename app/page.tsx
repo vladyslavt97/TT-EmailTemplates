@@ -5,7 +5,7 @@ import Setup from "@/components/Setup";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { PiSignOutBold } from "react-icons/pi";
 
@@ -13,13 +13,24 @@ export default function Home() {
   const { status } = useSession();
   const Router = useRouter();
 
+  const [loading, setLoading] = useState(true);
+  console.log("status: ", status);
+  
   useEffect(() => {
     if (status === "unauthenticated") {
       Router.push("/signin");
+    } else {
+      setLoading(false);
     }
   }, [status, Router]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+}
+
   return (
-    // <div className="grid grid-rows-[35px_1fr_25px] min-h-screen overflow-hidden">
+  <>
+  {status === "authenticated" &&
     <div className="grid grid-rows-[40px_1fr] min-h-screen overflow-hidden bg-[#363636]">
       <header className="bg-[#333333] to-100% w-full flex items-center justify-between px-5 text-white">
         <span className="font-bold"><i className="text-pink-800">Top Tech</i> production :)</span>
@@ -69,6 +80,7 @@ export default function Home() {
       {/* <footer className="bg-blue-50 w-full flex items-center justify-center">
         All rights reserved!
       </footer> */}
-    </div>
+    </div>}
+  </>
   );
 }
