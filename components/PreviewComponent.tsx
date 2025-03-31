@@ -112,9 +112,9 @@ export default function PreviewPage() {
       {!showPreview ? (
         <>
           {/* Render CodeMirror editor */}
-          <div ref={setContainer} className="w-full text-black h-[60vh] bg-[#282c34] overflow-y-scroll" />
+          <div ref={setContainer} className="w-full text-black h-[60vh] bg-[#282c34] overflow-y-scroll scrollbar-custom" />
           {validationErrors && (validationErrors.length > 0) && (
-            <ol className="text-red-500 p-4 h-[19vh] bg-[#000000] overflow-y-auto">
+            <ol className="text-red-500 p-4 h-[19vh] bg-[#000000] overflow-y-auto scrollbar-custom">
               <h2>Errors</h2>
               {validationErrors.map((el, index) => (
                 <li key={index}>
@@ -126,7 +126,7 @@ export default function PreviewPage() {
         </>
       ) : (
         <div
-          className="preview-content text-[#08204A] h-[79vh] overflow-y-scroll bg-white"
+          className="preview-content text-[#08204A] h-[79vh] overflow-y-scroll scrollbar-custom bg-white"
           dangerouslySetInnerHTML={{
             __html: htmlInput,
           }}

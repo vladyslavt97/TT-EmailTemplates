@@ -69,7 +69,7 @@ export default function Home() {
         </section>
 
         {/* Right section should be scrollable */}
-        <section className="flex justify-center overflow-y-auto rounded-lg transition-transform duration-500 ease-in-out scale-100 hover:scale-102">
+        <section className="flex justify-center overflow-y-auto rounded-lg transition-transform duration-500 ease-in-out scale-100 hover:scale-102 scrollbar-custom">
           <div className="w-full max-w-3xl">
             <EmailTemplate />
           </div>

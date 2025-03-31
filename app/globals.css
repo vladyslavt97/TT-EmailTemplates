@@ -168,3 +168,27 @@ a:hover {
   padding: 0px 0px 20px 20px;
   font: bold 14pt Arial;
 }
+
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: #dcdcaa #333333;;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #333333;
+  border-radius: 10px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #dcdcaa;
+  border-radius: 10px;
+  border: 2px solid #333333;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background-color: #bfbf8c;
+}

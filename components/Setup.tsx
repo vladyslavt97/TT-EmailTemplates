@@ -80,7 +80,7 @@ export default function Setup() {
   };
 
   return (
-    <div className="p-4 mx-auto bg-[#1e1e1e] text-[#d4d4d4] rounded-lg shadow-lg max-w-2xl border border-[#3c3c3c] font-mono max-h-[calc(100vh-90px)] overflow-y-auto">
+    <div className="p-4 mx-auto bg-[#1e1e1e] text-[#d4d4d4] rounded-lg shadow-lg max-w-2xl border border-[#3c3c3c] font-mono max-h-[calc(100vh-90px)] overflow-y-auto scrollbar-custom">
       {/* Template Name Input */}
       <div className="mb-6">
         <label className="block text-sm font-bold text-[#dcdcaa]">Template Name</label>
@@ -126,7 +126,7 @@ export default function Setup() {
       {/* Arguments List */}
       <div className="mb-6">
         <h2 className="text-lg font-bold text-[#dcdcaa]">Arguments</h2>
-        <ul className="text-sm max-h-[40vh] overflow-y-auto custom-scrollbar">
+        <ul className="text-sm max-h-[40vh] overflow-y-auto">
           {Object.entries(argumentsObject).map(([key, value]) => (
             <li key={key} className="flex items-center justify-between bg-[#252526] border border-[#3c3c3c] p-2 rounded my-2">
               <div className="flex items-center">
