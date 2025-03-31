@@ -113,16 +113,6 @@ export default function PreviewPage() {
         <>
           {/* Render CodeMirror editor */}
           <div ref={setContainer} className="w-full text-black h-[60vh] bg-[#282c34] overflow-y-scroll scrollbar-custom" />
-          {validationErrors && (validationErrors.length > 0) && (
-            <ol className="text-red-500 p-4 h-[19vh] bg-[#000000] overflow-y-auto scrollbar-custom">
-              <h2>Errors</h2>
-              {validationErrors.map((el, index) => (
-                <li key={index}>
-                  {index + 1}. {el.message} {" (line: "+el.line+")"}
-                </li>
-              ))}
-            </ol>
-          )}
         </>
       ) : (
         <div
@@ -132,7 +122,22 @@ export default function PreviewPage() {
           }}
         />
       )}
-      
+      <div className="h-[19vh] bg-[#000000] border-2 border-gray-400 overflow-y-auto scrollbar-custom">
+        {!showPreview &&
+          <>
+            {validationErrors && (validationErrors.length > 0) && (
+              <ol className="text-red-500 p-4 ">
+                <h2>Errors</h2>
+                {validationErrors.map((el, index) => (
+                  <li key={index}>
+                    {index + 1}. {el.message} {" (line: "+el.line+")"}
+                  </li>
+                ))}
+              </ol>
+            )}
+          </>
+        }
+      </div>
 
       {/* FOOTER  */}
       <div className="bg-[#08204A] py-5 text-center text-white rounded-b-lg h-[6vh] flex justify-center items-center absolute bottom-0 w-[700px]">
