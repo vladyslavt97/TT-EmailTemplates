@@ -26,7 +26,7 @@ export default function PreviewPage() {
   
       const result = await response.json();
       const errors = result.isValid ? [] : result.errors[0].messages;
-  
+
       // Check for lowercase "du", "dein", "dir"
       const forbiddenWords = [
         "du", "dich", "dir", "dein", "deine", "deiner", "deines", "deinen", "deinem"
@@ -46,12 +46,11 @@ export default function PreviewPage() {
           }
         });
       });
-  
       if (newErrors.length > 0) {
         setIsValidHTML(false);
         setValidationErrors([...errors, ...newErrors]);
       } else {
-        setIsValidHTML(result.isValid);
+        setIsValidHTML(true);
         setValidationErrors(errors);
       }
     } catch (error) {
