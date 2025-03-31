@@ -25,7 +25,7 @@ export default function PreviewPage() {
       });
   
       const result = await response.json();
-      let errors = result.isValid ? [] : result.errors[0].messages;
+      const errors = result.isValid ? [] : result.errors[0].messages;
   
       // Check for lowercase "du", "dein", "dir"
       const forbiddenWords = [
@@ -38,8 +38,7 @@ export default function PreviewPage() {
       lines.forEach((line, index) => {
         forbiddenWords.forEach((word) => {
           const regex = new RegExp(`\\b${word}\\b`, "g");
-          let match;
-          while ((match = regex.exec(line)) !== null) {
+          while (regex.exec(line) !== null) {
             newErrors.push({
               message: `Incorrect lowercase usage of "${word}". Should be capitalized.`,
               line: index + 1,
@@ -56,7 +55,6 @@ export default function PreviewPage() {
         setValidationErrors(errors);
       }
     } catch (error) {
-      console.error("Validation error:", error);
       setIsValidHTML(false);
       setValidationErrors([{ message: "Failed to validate HTML.", line: 0 }]);
     }
