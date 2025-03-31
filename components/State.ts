@@ -52,9 +52,9 @@ export const useStore = create<{
     title: "",
   },
   argumentsObject: {
-    identityInfo: "map",
-    isSecondNotification: "boolean",
-    isManagerEmail: "boolean",
+    approvalSet: "ApprovalSet",
+    // identityInfo: "map",
+    // isSecondNotification: "boolean",
   },
   templateName: "",
   description: "",
