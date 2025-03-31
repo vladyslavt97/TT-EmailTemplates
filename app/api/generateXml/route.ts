@@ -35,10 +35,6 @@ export async function POST(request: NextRequest) {
     const requestBody = await request.json();
     const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables, subject }: EmailArgs = requestBody;
 
-    console.log("German Tables: ", germanTables);
-    console.log("English Tables: ", englishTables);
-    console.log("argumentsObject: ", argumentsObject);
-
     // Process argumentsObject into XML format
     const argumentsXML = Object.entries(argumentsObject)
       .map(([name, type]) => `      <Argument name="${name}" type="${type}"/>`)
@@ -49,15 +45,15 @@ export async function POST(request: NextRequest) {
       .map(
         (table) => 
           `<table>
-          <tbody>
-          ${table
-            .map(
-              (row) => `  <tr>
-              <th scope="col">${row.key}</th>
-              <td>${row.value}</td>
-            </tr>`
-            )
-            .join("")}
+            <tbody>
+            ${table
+              .map(
+                (row) => `  <tr>
+                <th scope="col">${row.key}</th>
+                <td>${row.value}</td>
+              </tr>`
+              )
+              .join("")}
             </tbody>
           </table>`
         )
@@ -68,15 +64,15 @@ export async function POST(request: NextRequest) {
       .map(
         (table) => 
         `<table>
-        <tbody>
-        ${table
-          .map(
-            (row) => `  <tr>
-            <th scope="col">${row.key}</th>
-            <td>${row.value}</td>
-          </tr>`
-          )
-          .join("")}
+          <tbody>
+          ${table
+            .map(
+              (row) => `  <tr>
+              <th scope="col">${row.key}</th>
+              <td>${row.value}</td>
+            </tr>`
+            )
+            .join("")}
           </tbody>
         </table>`
       )
