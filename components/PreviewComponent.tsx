@@ -55,6 +55,7 @@ export default function PreviewPage() {
         setValidationErrors(errors);
       }
     } catch (error) {
+      console.error("HTML validation error:", error);
       setIsValidHTML(false);
       setValidationErrors([{ message: "Failed to validate HTML.", line: 0 }]);
     }
