@@ -23,24 +23,45 @@ export default function PreviewPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ htmlInput: html }),
       });
-
+  
       const result = await response.json();
-
-      if (!result.isValid) {
-        console.log("Validation failed");
-
+      let errors = result.isValid ? [] : result.errors[0].messages;
+  
+      // Check for lowercase "du", "dein", "dir"
+      const forbiddenWords = [
+        "du", "dich", "dir", "dein", "deine", "deiner", "deines", "deinen", "deinem"
+      ];
+      
+      const newErrors: { message: string; line: number }[] = [];
+  
+      const lines = html.split("\n");
+      lines.forEach((line, index) => {
+        forbiddenWords.forEach((word) => {
+          const regex = new RegExp(`\\b${word}\\b`, "g");
+          let match;
+          while ((match = regex.exec(line)) !== null) {
+            newErrors.push({
+              message: `Incorrect lowercase usage of "${word}". Should be capitalized.`,
+              line: index + 1,
+            });
+          }
+        });
+      });
+  
+      if (newErrors.length > 0) {
         setIsValidHTML(false);
-        setValidationErrors(result.errors[0].messages);
+        setValidationErrors([...errors, ...newErrors]);
       } else {
-        setIsValidHTML(true);
-        setValidationErrors([]);
+        setIsValidHTML(result.isValid);
+        setValidationErrors(errors);
       }
     } catch (error) {
       console.error("Validation error:", error);
       setIsValidHTML(false);
-      setValidationErrors([{message: "Failed to validate HTML.", line: 0}]);
+      setValidationErrors([{ message: "Failed to validate HTML.", line: 0 }]);
     }
   };
+  
 
   // Use the `useCodeMirror` hook for the CodeMirror editor
   const { setContainer } = useCodeMirror({
@@ -76,19 +97,12 @@ export default function PreviewPage() {
         >
           {showPreview ? "Edit HTML" : "Preview"}
         </button>
-
       </div>
-          {/* <button
-            onClick={handleToggleView}
-            className={`${validationErrors.length === 0 ? "bg-[#08204A] text-white" : "bg-[#636363] text-gray-400 opacity-30"} py-2 px-4 rounded m-10 cursor-pointer`}
-            disabled={!htmlInput.trim() || !isValidHTML}
-          >
-            {showPreview ? "Edit HTML" : "Preview"}
-          </button> */}
+
 
       {/* Header */}
       <div className="bg-[#08204A] p-5 text-center text-white rounded-t-lg h-[15vh] ">
-        <div className="inline-block bg-white p-2 rounded">
+        <div className="inline-block bg-white px-2 pt-2 rounded">
           <Image src="/loginLogo.png" alt="Ströer logo" width={150} height={50} />
         </div>
         <p className="bg-[#08204A] !text-white !-mb-0">{!showPreview && "Write your html here:"}</p>
@@ -119,8 +133,9 @@ export default function PreviewPage() {
           }}
         />
       )}
-        
-        {/* FOOTER  */}
+      
+
+      {/* FOOTER  */}
       <div className="bg-[#08204A] py-5 text-center text-white rounded-b-lg h-[6vh] flex justify-center items-center absolute bottom-0 w-[700px]">
         <h1 className="text-lg font-bold">Ströer IT Compliance - IAM</h1>
       </div>
