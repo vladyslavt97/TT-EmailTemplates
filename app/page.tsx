@@ -14,7 +14,6 @@ export default function Home() {
   const Router = useRouter();
 
   const [loading, setLoading] = useState(true);
-  console.log("status: ", status);
   
   useEffect(() => {
     if (status === "unauthenticated") {
