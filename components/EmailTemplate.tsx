@@ -21,7 +21,7 @@ export default function EmailTemplate() {
             height={50}
           />
         </div>
-        <h1 className="text-xs text-gray-500 mt-3">e.g. Externe Mitarbeiter Antrag/External employee application</h1>
+        <h1 className="text-xs text-gray-500 mt-3">e.g. Externe Mitarbeiter Antrag / External employee application</h1>
         <input
               type="text"
               value={title}
@@ -44,15 +44,19 @@ export default function EmailTemplate() {
             height={15}
             className="absolute top-2 right-2 object-contain"
           />
-          <p className="flex flex-row items-baseline gap-2 pt-2">Hallo 
-            <input
-              type="text"
-              value={germanAddressee}
-              onChange={(e) => setGermanAddressee(e.target.value)}
-              placeholder="Geben Sie den Namen des Empfängers ein..."
-              className="w-full p-3 mb-4 border border-gray-300 rounded bg-white"
-            />
-          </p>
+          <div className="flex flex-row items-center gap-2 pt-2">Hallo
+            <p>
+              <span className="text-xs text-gray-500">e.g. $identityInfo.addressee</span>
+              <input
+                type="text"
+                value={germanAddressee}
+                onChange={(e) => setGermanAddressee(e.target.value)}
+                placeholder="Geben Sie den Namen des Empfängers ein..."
+                className="w-full p-3 mb-4 border border-gray-300 rounded bg-white"
+              />
+            </p>
+          </div>
+          <span className="text-xs text-gray-500">e.g. ein Antrag auf die Erstellung einer externen Identität...</span>
           <textarea
             value={germanText}
             onChange={(e) => setGermanText(e.target.value)}
@@ -73,15 +77,19 @@ export default function EmailTemplate() {
             height={15}
             className="absolute top-2 right-2 object-contain"
           />
-          <p className="flex flex-row items-baseline gap-2 pt-2">Hello 
-            <input
-              type="text"
-              value={englishAddressee}
-              onChange={(e) => setEnglishAddressee(e.target.value)}
-              placeholder="Geben Sie den Namen des Empfängers ein..."
-              className="w-full p-3 mb-4 border border-gray-300 rounded bg-white"
-            />
-          </p>
+          <div className="flex flex-row items-center gap-2 pt-2">Hello
+            <p>
+              <span className="text-xs text-gray-500">e.g. $identityInfo.addressee</span>
+              <input
+                type="text"
+                value={englishAddressee}
+                onChange={(e) => setEnglishAddressee(e.target.value)}
+                placeholder="Geben Sie den Namen des Empfängers ein..."
+                className="w-full p-3 mb-4 border border-gray-300 rounded bg-white"
+              />
+            </p>
+          </div>
+          <span className="text-xs text-gray-500">e.g. an external identity creation request has been submitted...</span>
           <textarea
             value={englishText}
             onChange={(e) => setEnglishText(e.target.value)}
