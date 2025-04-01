@@ -1,7 +1,7 @@
 "use client";
 
+import { BsGearWideConnected } from "react-icons/bs";
 import { useStore } from "./State";
-import { FaRegSave } from "react-icons/fa";
 
 export default function SaveXml() {
   const { emailInfo, argumentsObject, templateName, subject, description, germanTables, englishTables } = useStore();
@@ -46,11 +46,11 @@ export default function SaveXml() {
 
   return (
     <div
-      className="flex flex-col items-center px-1 bg-[#252526] border border-[#3c3c3c] rounded hover:bg-[#3c3c3c] hover:scale-110 cursor-pointer text-[#d4d4d4] hover:text-yellow-500 transition-all"
+      className="flex flex-row gap-2 items-center px-1 bg-[#252526] border border-[#3c3c3c] rounded hover:bg-[#3c3c3c] hover:scale-110 cursor-pointer text-[#d4d4d4] hover:text-yellow-500 transition-all"
       onClick={handleGenerateXML}
     >
-      <FaRegSave size={22} />
-      <span className="text-xs">Save</span>
+      <BsGearWideConnected size={22} />
+      <span className="text-sm">Generate .XML</span>
     </div>
   );
 }
