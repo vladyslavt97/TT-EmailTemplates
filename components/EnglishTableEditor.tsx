@@ -22,7 +22,7 @@ export default function EnglishTableEditor() {
       )}
 
       {englishTables.length > 0 && (
-        <div className="bg-[#eff1fa] p-4 rounded-lg mt-4">
+        <div className="bg-[#eff1fa] p-4 rounded-lg mt-4 relative">
           <table className="w-full border-collapse">
             <tbody>
               {englishTables[0].map((row, rowIndex) => (
@@ -71,9 +71,9 @@ export default function EnglishTableEditor() {
             </button>
           </div>
           <button
-              className="bg-blue-900 text-white px-3 py-1 rounded hover:bg-blue-800 text-xs w-full mt-5 flex justify-center items-center gap-2"
+              className="text-red-500 hover:text-red-900 scalingItems-hover py-1 rounded text-xs cursor-pointer absolute top-2 right-2"
               onClick={() => removeEnglishTable(0)}>
-            Remove Table <FaTrashAlt size={15}/>
+              <FaTrashAlt size={15}/>
           </button>
         </div>
       )}

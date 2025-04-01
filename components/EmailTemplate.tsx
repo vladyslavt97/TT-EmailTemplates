@@ -32,11 +32,12 @@ export default function EmailTemplate() {
         </div>
         <div className="absolute top-0 right-0 mt-4 mr-4">
           <button onClick={togglePreview}>
-            {isPreviewMode ? <FaEyeSlash size={30} /> : <FaEye size={30} />}
+            {isPreviewMode ? <FaEyeSlash size={30} className="scalingItems-hover text-gray-600 cursor-pointer"/> 
+            : <FaEye size={30} className="scalingItems-hover cursor-pointer"/>}
           </button>
         </div>
-        <h1 className="text-xs text-gray-500 mt-3">e.g. Externe Mitarbeiter Antrag / External employee application</h1>
-        {!isPreviewMode && (
+        {!isPreviewMode && <h1 className="text-xs text-gray-500 my-3">e.g. Externe Mitarbeiter Antrag / External employee application</h1>}
+        {!isPreviewMode ? (
           <input
             type="text"
             value={title}
@@ -44,7 +45,9 @@ export default function EmailTemplate() {
             placeholder="Geben Sie den Title..."
             className="w-full p-1 mb-4 border border-gray-300 rounded bg-white text-black"
           />
-        )}
+        ):
+          <p className="!mb-0 !text-xl">{title}</p>
+        }
       </div>
 
       {/* Content */}
@@ -155,6 +158,13 @@ export default function EmailTemplate() {
           <p className="mt-4">Best regards,<br />Your Group IT - IT Compliance - IAM Team</p>
         </div>
       </div>
+      
+      <p className="!pl-[30px] text-[#555] !italic">
+        Diese Nachricht wurde automatisch erstellt. Antworten auf diese E-Mail werden nicht gelesen.
+      </p>
+      <p className="underfooter-note">
+        <a href="https://iam.stroeer.com/faq">Häufig gestellte Fragen (FAQ)</a>
+      </p>
 
       {/* Footer */}
       <div className="bg-[#08204A] p-5 text-center text-white rounded-b-lg">

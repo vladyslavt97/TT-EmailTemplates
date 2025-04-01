@@ -46,7 +46,7 @@ export default function SaveXml() {
 
   return (
     <div
-      className="flex flex-row gap-2 items-center px-1 bg-[#252526] border border-[#3c3c3c] rounded hover:bg-[#3c3c3c] hover:scale-110 cursor-pointer text-[#d4d4d4] hover:text-yellow-500 transition-all"
+      className="flex flex-row gap-2 items-center px-1 bg-[#252526] border border-[#3c3c3c] rounded hover:bg-[#3c3c3c] scalingItems-hover cursor-pointer text-[#d4d4d4] hover:text-yellow-500 transition-all"
       onClick={handleGenerateXML}
     >
       <BsGearWideConnected size={22} />

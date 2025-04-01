@@ -138,14 +138,14 @@ export default function Setup() {
                       onChange={handleArgumentNameChange}
                       className="bg-transparent border border-[#3c3c3c] p-1 rounded text-[#9cdcfe] w-40"
                     />
-                    <button onClick={() => saveEditedArgumentName(key)} className="text-green-400 hover:text-green-300 hover:scale-110">
+                    <button onClick={() => saveEditedArgumentName(key)} className="text-green-400 hover:text-green-300 scalingItems-hover">
                       <IoIosSave size={20} />
                     </button>
                   </div>
                 ) : (
                   <div className="flex items-center">
                     <span className="mr-2 text-[#9cdcfe]">{key}</span>
-                    <button onClick={() => { setEditingArg(key); setEditedArgName(key); }} className="text-[#c586c0] hover:text-white hover:scale-110">
+                    <button onClick={() => { setEditingArg(key); setEditedArgName(key); }} className="text-[#c586c0] hover:text-white scalingItems-hover">
                       <CiEdit />
                     </button>
                   </div>
@@ -161,7 +161,7 @@ export default function Setup() {
                     className="bg-transparent border border-[#3c3c3c] p-1 rounded text-[#9cdcfe] ml-2" />
                 )}
               </div>
-              <button onClick={() => removeArgument(key)} className="text-red-400 hover:text-red-300 hover:scale-110">
+              <button onClick={() => removeArgument(key)} className="text-red-400 hover:text-red-300 scalingItems-hover">
                 <FaTrashAlt size={20} />
               </button>
             </li>
