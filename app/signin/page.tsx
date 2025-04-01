@@ -36,7 +36,7 @@ const SignIn = () => {
         onClick={handleSignIn}
         className="bg-[#1e1e1e] text-[#dcdcaa] font-mono px-4 py-1 rounded-lg shadow-md border border-[#3c3c3c] hover:bg-[#252526] hover:!text-[#ffffff] transition duration-300 cursor-pointer"
       >
-        Sign in with Microsoft"
+        Sign in with Microsoft
       </button>}
     </div>
   );
