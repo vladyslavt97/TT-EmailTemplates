@@ -5,18 +5,21 @@ import { useCodeMirror } from "@uiw/react-codemirror";
 import { html } from "@codemirror/lang-html";
 import { oneDark } from "@codemirror/theme-one-dark";
 import Link from "next/link";
+import { PropagateLoader } from "react-spinners";
 
 export default function PreviewPage() {
   const [htmlInput, setHtmlInput] = useState("");
   const [showPreview, setShowPreview] = useState(false);
   const [isValidHTML, setIsValidHTML] = useState(true);
   const [validationErrors, setValidationErrors] = useState<Array<{ message: string, line: number }>>([]);
-
+  const [tryingToValidate,setTryingToValidate]= useState(false);
+  
   const handleToggleView = () => {
     setShowPreview(!showPreview);
   };
 
   const validateHTML = async (html: string) => {
+    setTryingToValidate(true)
     try {
       const response = await fetch("/api/validator", {
         method: "POST",
@@ -26,7 +29,7 @@ export default function PreviewPage() {
   
       const result = await response.json();
       const errors = result.isValid ? [] : result.errors[0].messages;
-
+      
       // Check for lowercase "du", "dein", "dir"
       const forbiddenWords = [
         "du", "dich", "dir", "dein", "deine", "deiner", "deines", "deinen", "deinem"
@@ -50,7 +53,7 @@ export default function PreviewPage() {
         setIsValidHTML(false);
         setValidationErrors([...errors, ...newErrors]);
       } else {
-        setIsValidHTML(true);
+        setIsValidHTML(result.isValid);
         setValidationErrors(errors);
       }
     } catch (error) {
@@ -58,6 +61,7 @@ export default function PreviewPage() {
       setIsValidHTML(false);
       setValidationErrors([{ message: "Failed to validate HTML.", line: 0 }]);
     }
+    setTryingToValidate(false)
   };
   
 
@@ -71,7 +75,7 @@ export default function PreviewPage() {
       validateHTML(value);
     },
   });
-
+  
   return (
     <div className="mx-auto bg-black rounded-lg text-[#08204A] font-sans h-screen w-[700px] my-auto">
       <div className="absolute top-1 right-5 flex flex-col justify-center">
@@ -84,17 +88,18 @@ export default function PreviewPage() {
         {/* Button to toggle between textarea and preview */}
         <button
           onClick={handleToggleView}
-          className={`text-sm font-bold py-2 px-4 rounded-lg shadow-xl transition duration-300 cursor-pointer
-            ${showPreview ? 
-              "bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white" :
-              validationErrors.length === 0 ? 
-                "bg-[#08204A] text-white" : 
-                "bg-[#636363] text-gray-400 opacity-30 cursor-not-allowed"
+          className={`text-sm font-bold py-2 px-4 rounded-lg shadow-xl transition duration-300 cursor-pointer h-10
+            ${!htmlInput.trim() || !isValidHTML || tryingToValidate
+              ? "bg-[#636363] text-gray-400 opacity-30 cursor-not-allowed" // Disabled state
+              : showPreview
+                ? "bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white" // Preview mode
+                : "bg-[#08204A] text-white" // Normal active state
             }`}
-          disabled={!htmlInput.trim() || !isValidHTML}
+          disabled={!htmlInput.trim() || !isValidHTML || tryingToValidate}
         >
-          {showPreview ? "Edit HTML" : "Preview"}
+          {tryingToValidate ? <PropagateLoader color="white" /> : showPreview ? "Edit HTML" : "Preview"}
         </button>
+
       </div>
 
 
