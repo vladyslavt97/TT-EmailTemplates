@@ -44,19 +44,19 @@ export async function POST(request: NextRequest) {
     const germanTablesHTML = germanTables
       .map(
         (table) => 
-          `<table>
-            <tbody>
-            ${table
-              .map(
-                (row) => `  <tr>
-                <th scope="col">${row.key}</th>
-                <td>${row.value}</td>
-              </tr>`
-              )
-              .join("")}
-            </tbody>
-          </table>`
-        )
+        `<table>
+          <tbody>
+          ${table
+            .map(
+              (row) => `  <tr>
+              <th scope="col">${row.key}</th>
+              <td>${row.value}</td>
+            </tr>`
+            )
+            .join("")}
+          </tbody>
+        </table>`
+      )
       .join(""); // Combine all German tables into one string
 
     // Process English tables into HTML format
