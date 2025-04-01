@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { PiSignOutBold } from "react-icons/pi";
+import SaveToLocalStorage from "@/components/SaveToLocalStorage";
 
 export default function Home() {
   const { status } = useSession();
@@ -44,6 +45,7 @@ export default function Home() {
           />
         </div>
         <SaveXml/>
+        <SaveToLocalStorage/>
         <Link
           href="/preview"
           className="bg-[#1e1e1e] !text-[#dcdcaa] font-mono px-4 py-1 rounded-lg shadow-md border border-[#3c3c3c] hover:bg-[#252526] hover:!text-cyan-500 transition duration-300 cursor-pointer"
