@@ -16,6 +16,14 @@ export default function Setup() {
   const [editingArg, setEditingArg] = useState<string | null>(null);
   const [editedArgName, setEditedArgName] = useState<string>("");
   const [argTypes, setArgTypes] = useState(["map", "boolean", "string", "list", "other"]);
+  const [conditionalInjected, setConditionalInjected] = useState(false);
+  const conditionalSubject = `<![CDATA[ #set($as = $workflowCase.get("approvalSet"))
+    #if($as && !$as.hasRejected())
+      Externe Identität erfolgreich in IAM erstellt
+    #else
+      Externe Identitätsanfrage abgelehnt
+    #end
+  ]]>`;
 
   const handleTemplateNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTemplateName(e.target.value);
@@ -104,15 +112,25 @@ export default function Setup() {
             <label className="block text-sm font-bold text-[#dcdcaa]">Subject</label>
             <p className="text-xs text-gray-400">e.g. Externe Mitarbeiter Antrag</p>
           </div>
-          <div className="text-xs bg-white text-black p-1 rounded-full flex justify-center items-center hover:bg-gray-200 cursor-pointer">Generate Conditional</div>
+          <div className="text-xs bg-white text-black p-1 rounded-full flex justify-center items-center hover:bg-gray-200 cursor-pointer"
+           onClick={() => {
+            setSubject(conditionalSubject);
+            setConditionalInjected(true);
+          }}
+           >
+            Generate Conditional
+          </div>
 
         </div>
         <textarea
           value={subject}
           onChange={handleSubjectChange}
-          className="w-full mt-2 bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none resize-none"
+          className={`${subject.length < 255 ? "border-2 border-gray-400": "border-2 border-red-500"} w-full mt-2 bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none resize-none ${conditionalInjected ? "h-[250px]" : "h-[100px]"}`}
           placeholder="Enter subject"
         />
+        <div className="text-xs text-right text-gray-400 mt-1">
+          <span className={`${subject.length < 255 ? "text-gray-400": "text-red-500 text-bold"}`}>{subject.length}</span> / 255 characters
+        </div>
       </div>
 
       {/* Description Input */}
