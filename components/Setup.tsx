@@ -15,7 +15,7 @@ export default function Setup() {
 
   const [editingArg, setEditingArg] = useState<string | null>(null);
   const [editedArgName, setEditedArgName] = useState<string>("");
-  const [argTypes, setArgTypes] = useState(["map", "boolean", "string", "list", "ApprovalSet", "other"]);
+  const [argTypes, setArgTypes] = useState(["map", "boolean", "string", "list", "other"]);
 
   const handleTemplateNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTemplateName(e.target.value);
@@ -150,11 +150,22 @@ export default function Setup() {
                     </button>
                   </div>
                 )}
-                <select value={value} onChange={(e) => handleArgumentChange(key, e.target.value)}
-                  className="bg-[#252526] border border-[#3c3c3c] p-1 rounded text-[#9cdcfe] ml-2">
+                <select
+                  value={value}
+                  onChange={(e) => handleArgumentChange(key, e.target.value)}
+                  className="bg-[#252526] border border-[#3c3c3c] p-1 rounded text-[#9cdcfe] ml-2"
+                >
+                  {/* Render all known types */}
                   {argTypes.map((type) => (
-                    <option key={type} value={type}>{type}</option>
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
                   ))}
+
+                  {/* If current value is not in the list, show it as a custom option */}
+                  {!argTypes.includes(value) && (
+                    <option value={value}>{value}</option>
+                  )}
                 </select>
                 {value === "" && (
                   <input type="text" placeholder="Enter custom type" onChange={(e) => handleCustomArgChange(key, e.target.value)}
