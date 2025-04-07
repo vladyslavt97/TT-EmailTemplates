@@ -99,8 +99,10 @@ ${argumentsXML}
     <!-- Creating a Hashmap with relevant attributes  -->
     #set( $rule = $ctx.getObjectByName($spTools.class.forName("sailpoint.object.Rule"), "STR-Rule-EmailTemplateGeneral") )
     #set( $ruleArgs=$spTools.class.forName("java.util.HashMap").newInstance() )
-    #set( $dummy = $ruleArgs.put( "approvalSet", $approvalSet ) ) 
-    #set( $identityInfo = $ctx.runRule($rule, $ruleArgs) )
+    #set( $dummy = $ruleArgs.put( "provisioningPlan", $provisioningPlan ) ) 
+    #set( $dummy = $ruleArgs.put( "receiver", $receiver ) ) 
+    #set( $dummy = $ruleArgs.put( "workflowCase", $workflowCase ) ) 
+    #set( $emailVariables = $ctx.runRule($rule, $ruleArgs) )
     
     #if( $headerTemplate )
 			  $headerTemplate
