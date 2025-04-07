@@ -99,8 +99,14 @@ export default function Setup() {
 
       {/* Subject Input */}
       <div className="mb-6">
-        <label className="block text-sm font-bold text-[#dcdcaa]">Subject</label>
-        <p className="text-xs text-gray-400">e.g. Externe Mitarbeiter Antrag</p>
+        <div className="flex flex-row gap-2 items-center">
+          <div className="flex flex-col">
+            <label className="block text-sm font-bold text-[#dcdcaa]">Subject</label>
+            <p className="text-xs text-gray-400">e.g. Externe Mitarbeiter Antrag</p>
+          </div>
+          <div className="text-xs bg-white text-black p-1 rounded-full flex justify-center items-center hover:bg-gray-200 cursor-pointer">Generate Conditional</div>
+
+        </div>
         <textarea
           value={subject}
           onChange={handleSubjectChange}
