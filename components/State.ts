@@ -52,7 +52,9 @@ export const useStore = create<{
     title: "",
   },
   argumentsObject: {
-    approvalSet: "ApprovalSet",
+    provisioningPlan: "provisioningPlan",
+    receiver: "String",
+    workflowCase: "workflowCase",
     // identityInfo: "map",
     // isSecondNotification: "boolean",
   },
