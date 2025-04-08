@@ -121,29 +121,36 @@ export default function Setup() {
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none"
+              className={`w-full bg-[#252526] border-2 ${subject.length < 66 ? "border-[#3c3c3c]" : "border-red-500"} p-2 rounded text-[#9cdcfe] text-sm outline-none`}
               placeholder="Enter first conditional subject"
             />
+            <div className="text-xs text-right text-gray-400 mt-1">
+              <span className={`${subject.length < 66 ? "text-gray-400": "text-red-500 text-bold"}`}>{subject.length}</span> / 66 characters
+            </div>
             <input
               type="text"
               value={subject2}
               onChange={(e) => setSubject2(e.target.value)}
-              className="w-full bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none"
+              className={`w-full bg-[#252526] border-2 ${subject2.length < 66 ? "border-[#3c3c3c]" : "border-red-500"} p-2 rounded text-[#9cdcfe] text-sm outline-none`}
               placeholder="Enter second conditional subject"
             />
+            <div className="text-xs text-right text-gray-400 mt-1">
+              <span className={`${subject2.length < 66 ? "text-gray-400": "text-red-500 text-bold"}`}>{subject2.length}</span> / 66 characters
+            </div>
           </div>
         ) : (
-          <textarea
-            value={subject}
-            onChange={handleSubjectChange}
-            className={`${subject.length < 132 ? "border-2 border-gray-400": "border-2 border-red-500"} w-full mt-2 bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none resize-none ${conditionalInjected ? "h-[250px]" : "h-[100px]"}`}
-            placeholder="Enter subject"
-          />
+          <>
+            <textarea
+              value={subject}
+              onChange={handleSubjectChange}
+              className={`${subject.length < 132 ? "border-2 border-gray-400": "border-2 border-red-500"} w-full mt-2 bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none resize-none ${conditionalInjected ? "h-[250px]" : "h-[100px]"}`}
+              placeholder="Enter subject"
+            />
+            <div className="text-xs text-right text-gray-400 mt-1">
+              <span className={`${subject.length < 132 ? "text-gray-400": "text-red-500 text-bold"}`}>{subject.length}</span> / 132 characters
+            </div>
+          </>
         )}
-
-        <div className="text-xs text-right text-gray-400 mt-1">
-          <span className={`${subject.length < 132 ? "text-gray-400": "text-red-500 text-bold"}`}>{subject.length}</span> / 132 characters
-        </div>
       </div>
 
       {/* Description Input */}
