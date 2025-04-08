@@ -25,6 +25,7 @@ interface EmailArgs {
   templateName: string;
   description: string;
   subject: string;
+  subject2: string;
   germanTables: Table[]; // German tables
   englishTables: Table[]; // English tables
 }
@@ -33,7 +34,21 @@ export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const requestBody = await request.json();
-    const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables, subject }: EmailArgs = requestBody;
+    const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables, subject, subject2 }: EmailArgs = requestBody;
+
+    //
+    let subjectConfigured = "";
+    if(subject2 === ""){
+      subjectConfigured = subject;
+    } else if (subject !== "" && subject2 ){
+      subjectConfigured = `<![CDATA[ #set($as = $workflowCase.get("approvalSet"))
+      #if($as && !$as.hasRejected())
+        ${subject}
+      #else
+        ${subject2}
+      #end
+    ]]>`;
+    }
 
     // Process argumentsObject into XML format
     const argumentsXML = Object.entries(argumentsObject)
@@ -88,7 +103,7 @@ export async function POST(request: NextRequest) {
 ${argumentsXML}
     </Inputs>
   </Signature>
-  <Subject>${subject}</Subject>
+  <Subject>${subjectConfigured}</Subject>
   <Body>
   <![CDATA[ 
     #set($ctx = $spTools.class.forName("sailpoint.api.SailPointFactory").getMethod("getFactory", null).invoke(null,null).getCurrentContext())

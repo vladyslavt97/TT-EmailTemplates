@@ -4,7 +4,7 @@ import { BsGearWideConnected } from "react-icons/bs";
 import { useStore } from "./State";
 
 export default function SaveXml() {
-  const { emailInfo, argumentsObject, templateName, subject, description, germanTables, englishTables } = useStore();
+  const { emailInfo, argumentsObject, templateName, subject, subject2, description, germanTables, englishTables } = useStore();
 
   const handleGenerateXML = async () => {
     try {
@@ -19,7 +19,8 @@ export default function SaveXml() {
           description,
           germanTables,
           englishTables,
-          subject
+          subject,
+          subject2
         }),
       });
 

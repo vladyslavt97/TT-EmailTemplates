@@ -8,7 +8,7 @@ import { IoIosSave } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
 
 export default function Setup() {
-  const { templateName, setTemplateName, subject, setSubject, description, setDescription, argumentsObject, setArgumentsObject } = useStore();
+  const { templateName, setTemplateName, subject, setSubject, subject2, setSubject2, description, setDescription, argumentsObject, setArgumentsObject } = useStore();
   const [newArgName, setNewArgName] = useState("");
   const [newArgType, setNewArgType] = useState("map");
   const [customArgType, setCustomArgType] = useState("");
@@ -17,13 +17,7 @@ export default function Setup() {
   const [editedArgName, setEditedArgName] = useState<string>("");
   const [argTypes, setArgTypes] = useState(["map", "boolean", "string", "list", "other"]);
   const [conditionalInjected, setConditionalInjected] = useState(false);
-  const conditionalSubject = `<![CDATA[ #set($as = $workflowCase.get("approvalSet"))
-    #if($as && !$as.hasRejected())
-      Externe Identität erfolgreich in IAM erstellt
-    #else
-      Externe Identitätsanfrage abgelehnt
-    #end
-  ]]>`;
+
 
   const handleTemplateNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTemplateName(e.target.value);
@@ -114,22 +108,41 @@ export default function Setup() {
           </div>
           <div className="text-xs bg-white text-black p-1 rounded-full flex justify-center items-center hover:bg-gray-200 cursor-pointer"
            onClick={() => {
-            setSubject(conditionalSubject);
-            setConditionalInjected(true);
+            setConditionalInjected(!conditionalInjected);
           }}
            >
             Generate Conditional
           </div>
 
         </div>
-        <textarea
-          value={subject}
-          onChange={handleSubjectChange}
-          className={`${subject.length < 255 ? "border-2 border-gray-400": "border-2 border-red-500"} w-full mt-2 bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none resize-none ${conditionalInjected ? "h-[250px]" : "h-[100px]"}`}
-          placeholder="Enter subject"
-        />
+        {conditionalInjected ? (
+          <div className="flex flex-col gap-2 mt-2">
+            <input
+              type="text"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              className="w-full bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none"
+              placeholder="Enter first conditional subject"
+            />
+            <input
+              type="text"
+              value={subject2}
+              onChange={(e) => setSubject2(e.target.value)}
+              className="w-full bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none"
+              placeholder="Enter second conditional subject"
+            />
+          </div>
+        ) : (
+          <textarea
+            value={subject}
+            onChange={handleSubjectChange}
+            className={`${subject.length < 132 ? "border-2 border-gray-400": "border-2 border-red-500"} w-full mt-2 bg-[#252526] border border-[#3c3c3c] p-2 rounded text-[#9cdcfe] text-sm outline-none resize-none ${conditionalInjected ? "h-[250px]" : "h-[100px]"}`}
+            placeholder="Enter subject"
+          />
+        )}
+
         <div className="text-xs text-right text-gray-400 mt-1">
-          <span className={`${subject.length < 255 ? "text-gray-400": "text-red-500 text-bold"}`}>{subject.length}</span> / 255 characters
+          <span className={`${subject.length < 132 ? "text-gray-400": "text-red-500 text-bold"}`}>{subject.length}</span> / 132 characters
         </div>
       </div>
 

@@ -21,6 +21,7 @@ export const useStore = create<{
   templateName: string;
   description: string;
   subject: string;
+  subject2: string;
   germanTables: Table[]; // Separate German tables
   englishTables: Table[]; // Separate English tables
   setEmailInfo: (emailInfo: EmailInfo) => void;
@@ -28,6 +29,7 @@ export const useStore = create<{
   setTemplateName: (templateName: string) => void;
   setDescription: (description: string) => void;
   setSubject: (subject: string) => void;
+  setSubject2: (subject2: string) => void;
   setGermanText: (germanText: string) => void;
   setEnglishText: (englishText: string) => void;
   setGermanAddressee: (germanAddressee: string) => void;
@@ -61,6 +63,7 @@ export const useStore = create<{
   templateName: "",
   description: "",
   subject: "",
+  subject2: "",
   germanTables: [], // Initialize separate German tables
   englishTables: [], // Initialize separate English tables
 
@@ -69,6 +72,7 @@ export const useStore = create<{
   setTemplateName: (templateName) => set({ templateName }),
   setDescription: (description) => set({ description }),
   setSubject: (subject) => set({ subject }),
+  setSubject2: (subject2) => set({ subject2 }),
   setGermanText: (germanText) =>
     set((state) => ({ emailInfo: { ...state.emailInfo, germanText } })),
   setEnglishText: (englishText) =>
