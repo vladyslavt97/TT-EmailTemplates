@@ -41,13 +41,7 @@ export async function POST(request: NextRequest) {
     if(subject2 === ""){
       subjectConfigured = subject;
     } else if (subject !== "" && subject2 ){
-      subjectConfigured = `<![CDATA[ #set($as = $workflowCase.get("approvalSet"))
-      #if($as && !$as.hasRejected())
-        ${subject}
-      #else
-        ${subject2}
-      #end
-    ]]>`;
+      subjectConfigured = `<![CDATA[ #set($as = $workflowCase.get("approvalSet")) #if($as && !$as.hasRejected()) ${subject} #else ${subject2} #end ]]>`;
     }
 
     // Process argumentsObject into XML format
