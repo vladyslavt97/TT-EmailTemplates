@@ -41,14 +41,26 @@ export default function SaveXml() {
     } catch (error) {
       alert("Error generating XML file: " + error);
     }
-
-    // ✅ Log to MongoDB
-    await fetch('/api/logClick', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ templateName }),
-    });
+  
+    // ✅ Handle response from /logClick
+    try {
+      const logResponse = await fetch('/api/logClick', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ templateName }),
+      });
+  
+      if (!logResponse.ok) {
+        console.error("Log failed with status:", logResponse.status);
+      } else {
+        const logResult = await logResponse.json();
+        console.log("Log response:", logResult);
+      }
+    } catch (logError) {
+      console.error("Error logging click:", logError);
+    }
   };
+  
 
   return (
     <div
