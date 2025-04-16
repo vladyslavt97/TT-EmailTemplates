@@ -27,15 +27,20 @@ export default function SaveXml() {
       if (!response.ok) {
         throw new Error("Failed to generate XML file");
       }
-
-      // Convert response to a blob
+  
+      // ✅ Log to MongoDB
+      await fetch('/api/logClick', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ templateName }),
+      });
+  
+      // Handle download
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-
-      // Create a temporary link and trigger a download
       const a = document.createElement("a");
       a.href = url;
-      a.download = `STR-EmailTemplate-${templateName}.xml`; // Use dynamic template name
+      a.download = `STR-EmailTemplate-${templateName}.xml`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
