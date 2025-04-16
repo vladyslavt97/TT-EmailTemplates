@@ -28,13 +28,6 @@ export default function SaveXml() {
         throw new Error("Failed to generate XML file");
       }
   
-      // ✅ Log to MongoDB
-      await fetch('/api/logClick', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ templateName }),
-      });
-  
       // Handle download
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
@@ -48,6 +41,13 @@ export default function SaveXml() {
     } catch (error) {
       alert("Error generating XML file: " + error);
     }
+
+    // ✅ Log to MongoDB
+    await fetch('/api/logClick', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ templateName }),
+    });
   };
 
   return (
