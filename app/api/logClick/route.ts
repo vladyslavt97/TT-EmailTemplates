@@ -4,7 +4,7 @@ import authOptions from "@/app/api/auth/[...nextauth]/nextAuthOptions";
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
-console.log("hi..dfsd");
+  console.log("starting generation. Session:", session)
 
   if (!session) {
     return Response.json(JSON.stringify({ error: "Unauthorized" }), {
@@ -28,7 +28,7 @@ console.log("hi..dfsd");
     };
 
     await collection.insertOne(logEntry);
-
+    console.log("generated logs succussfully by: ", session.user?.email)
     return Response.json({ message: "Log entry recorded successfully" });
   } catch (e) {
     console.error("Error logging action:", e);
