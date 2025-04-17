@@ -34,7 +34,9 @@ export default function Home() {
   {status === "authenticated" &&
     <div className="grid grid-rows-[40px_1fr] min-h-screen overflow-hidden bg-[#363636]">
       <header className="bg-[#333333] to-100% w-full flex items-center justify-between px-5 text-white">
-        <span className="font-bold"><i className="text-pink-800">Top Tech</i> production :)</span>
+        <Link href="/auditlogs">
+          <span className="font-bold text-white"><i className="text-pink-800">Top Tech</i> production :)</span>
+        </Link>
         <div className="flex flex-row gap-2">
           <h2><span className="font-bold italic text-lg text-pink-800">Basic</span> EmailTemplate generator</h2>
           <Image

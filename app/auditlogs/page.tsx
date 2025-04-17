@@ -87,14 +87,14 @@ export default function AuditLogsPage() {
     <div className="flex flex-col h-screen bg-gray-500 text-white">
       {/* Top: Audit Logs Table (scrollable) */}
       <div className="h-1/2 overflow-y-auto p-6">
-        <div className="bg-[#1e1e1e] border border-[#333] rounded-xl overflow-hidden shadow-lg">
+        <div className="bg-[#1e1e1e] h-full border border-[#333] rounded-xl overflow-hidden shadow-lg">
           <div className="px-6 py-4 border-b border-[#333]">
             <h2 className="text-xl font-semibold">Audit Logs</h2>
           </div>
           <div className="grid grid-cols-3 gap-4 px-6 py-3 text-sm font-semibold text-gray-300 bg-[#2a2a2a] border-b border-[#333]">
-            <div>Who</div>
-            <div>What</div>
-            <div>When</div>
+            <div>Who?</div>
+            <div>Template Name</div>
+            <div>When?</div>
           </div>
           {isLoading ? (
             <Spinner />
@@ -105,11 +105,15 @@ export default function AuditLogsPage() {
                 key={log._id}
                 className="grid grid-cols-3 gap-4 px-6 py-3 text-sm items-center"
               >
-                <div className="text-yellow-400 font-medium">{log.email}</div>
+                <div className="text-yellow-400 font-medium">{log.email
+                  .slice(0, -12)
+                  .replace(".", " ")
+                  .split(" ")
+                  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ")}
+                </div>
                 <div>
-                  <span className="text-green-400">{log.action}</span>{" "}
-                  <span className="text-gray-400">on</span>{" "}
-                  <span className="italic text-white">{log.templateName}</span>
+                  <span className="text-white">{log.templateName}</span>
                 </div>
                 <div className="text-gray-400">
                   {new Date(log.timestamp).toLocaleString()}
