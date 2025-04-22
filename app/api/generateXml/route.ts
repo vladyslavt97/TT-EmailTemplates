@@ -169,7 +169,6 @@ ${argumentsXML}
   ]]>
   </Body>
 </EmailTemplate>
-
 `;
 
     return new Response(xmlContent, {
