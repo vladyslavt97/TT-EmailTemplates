@@ -34,6 +34,8 @@ export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const requestBody = await request.json();
+    console.log("Received body:", requestBody);
+
     const { emailInfo, argumentsObject, templateName, description, germanTables, englishTables, subject, subject2 }: EmailArgs = requestBody;
 
     //
@@ -43,6 +45,7 @@ export async function POST(request: NextRequest) {
     } else if (subject !== "" && subject2 ){
       subjectConfigured = `<![CDATA[ #set($as = $workflowCase.get("approvalSet")) #if($as && !$as.hasRejected()) ${subject} #else ${subject2} #end ]]>`;
     }
+    console.log("subjectConfigured: ", subjectConfigured);
 
     // Process argumentsObject into XML format
     const argumentsXML = Object.entries(argumentsObject)
@@ -86,6 +89,10 @@ export async function POST(request: NextRequest) {
         </table>`
       )
       .join(""); // Combine all English tables into one string
+
+    if (!emailInfo || !templateName || !description) {
+      throw new Error("Missing required fields in request body");
+    }
       
 
     const xmlContent = `<?xml version='1.0' encoding='UTF-8'?>
@@ -173,6 +180,7 @@ ${argumentsXML}
       },
     });
   } catch (err) {
+    console.error("XML generation failed", err);
     return new Response(JSON.stringify({ message: `Error generating XML file: ${err}` }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
